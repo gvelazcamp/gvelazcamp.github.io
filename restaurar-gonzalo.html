@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Restaurar Gonzalo</title>
+</head>
+<body>
+<script>
+(() => {
+  // Copia de seguridad del estado actual
+  const backup = {};
+
+  for (let i = 0; i < localStorage.length; i++) {
+    const k = localStorage.key(i);
+    backup[k] = localStorage.getItem(k);
+  }
+
+  localStorage.setItem(
+    "gya_backup_antes_restaurar_gonzalo",
+    JSON.stringify(backup)
+  );
+
+  // Metaprogreso
+  let meta = {};
+
+  try {
+    meta = JSON.parse(localStorage.getItem("gya_mundo_meta") || "{}");
+  } catch (e) {}
+
+  meta.monedas = 4712;
+  meta.monedasGanadasTotal = Math.max(
+    Number(meta.monedasGanadasTotal) || 0,
+    4712
+  );
+  meta.mejorRachaVictorias = Math.max(
+    Number(meta.mejorRachaVictorias) || 0,
+    1
+  );
+
+  localStorage.setItem("gya_mundo_meta", JSON.stringify(meta));
+
+  // Perfil viejo
+  localStorage.setItem("gya_nombre", "Gonzalo");
+  localStorage.setItem("larueda_nombre", "Gonzalo");
+  localStorage.setItem("gya_avatar", "avatar-22");
+
+  // Tablero y ficha
+  localStorage.setItem("gya_tablero_equipado", "fondo-lab-toxico");
+  localStorage.setItem("gya_ficha_skin_equipada", "ficha-mate-campo");
+
+  // Compras guardadas en el Gonzalo viejo
+  localStorage.setItem(
+    "gya_tableros_owned",
+    JSON.stringify(["fondo-lab-toxico"])
+  );
+
+  localStorage.setItem(
+    "gya_fichas_owned",
+    JSON.stringify([
+      "ficha-lab-toxico-1",
+      "ficha-candy",
+      "ficha-alien",
+      "ficha-mate-campo"
+    ])
+  );
+
+  localStorage.setItem(
+    "gya_avatars_owned",
+    JSON.stringify([])
+  );
+
+  // IMPORTANTE:
+  // Evitamos que el Gonzalo actual sobrescriba inmediatamente
+  // el registro GLOBAL viejo de Supabase.
+  localStorage.removeItem("gya_ranking_perfil");
+
+  alert("Gonzalo viejo restaurado. Se abrirá el juego.");
+
+  location.href =
+    "/gira-y-adivina-rioplatense/index.html";
+})();
+</script>
+</body>
+</html>
