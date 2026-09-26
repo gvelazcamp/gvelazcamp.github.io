@@ -2,6 +2,25 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<!--
+  Esta página raíz del dominio (gvelazcamp.github.io) solo existe para
+  redirigir al juego real, que vive en /gira-y-adivina-rioplatense/.
+
+  Antes mostraba, aunque sea un instante, el texto plano "Redirigiendo
+  a..." con el link completo visible (sin estilo, pantalla en blanco) —
+  se notaba al abrir el juego. Se arregló así:
+  1. El <script> con location.replace() redirige apenas se lee el HTML,
+     antes de que el navegador llegue a pintar el <body> con el texto.
+  2. El <meta http-equiv="refresh"> queda como respaldo, por si el
+     navegador tiene JavaScript desactivado (rarísimo hoy en día).
+  3. El fondo (html,body) es del mismo color oscuro que el juego, para
+     que ni ese instante rarísimo se vea como una pantalla rota/blanca.
+  4. El texto con el link visible quedó adentro de <noscript>, así que
+     con JavaScript activado (99% de los casos) nunca se llega a ver.
+
+  No sacar el <script> de location.replace() ni el fondo oscuro: son
+  los que evitan que se note la carga.
+-->
 <title>Girá y Adiviná Rioplatense</title>
 <style>html,body{background:#160B24;margin:0;height:100%}</style>
 <script>location.replace("https://gvelazcamp.github.io/gira-y-adivina-rioplatense/");</script>
