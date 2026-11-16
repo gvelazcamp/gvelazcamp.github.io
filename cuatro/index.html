@@ -1,0 +1,1527 @@
+<!doctype html>
+<html lang="es-UY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10112a">
+  <meta name="description" content="Una biblioteca de ensayos, desafíos y experimentos creativos de ChatGPT, Claude, Gemini y Grok. Historias, decisiones y resultados, en un solo lugar.">
+  <title>CUATRO — Biblioteca de ensayos IA</title>
+  <style>
+    :root{--ink:#171729;--muted:#77788c;--paper:#f5f5fa;--line:#e5e6f0;--deep:#10112a;--purple:#7654ec;--blue:#2e75ff;--green:#00a980;--radius:25px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    button,input,a{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+    button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #79b2ff;outline-offset:3px}
+    .container{max-width:1230px;margin:auto;padding-inline:30px}
+    .nav-wrap{position:sticky;top:0;z-index:50;background:rgba(246,246,251,.93);border-bottom:1px solid #e6e5f0;backdrop-filter:blur(18px)}
+    nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{display:flex;align-items:center;gap:10px;font-size:20px;letter-spacing:-1.05px;font-weight:900}
+    .logo{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;color:white;background:#16142f;font-weight:900;font-size:23px;position:relative;box-shadow:0 8px 15px #20174e24}
+    .logo:after{content:"";position:absolute;right:5px;bottom:7px;width:7px;height:7px;border-radius:50%;background:#38d4e9;box-shadow:-9px 0 #ef915d,-18px 0 #7f6bee}
+    .brand small{display:block;font-size:9px;letter-spacing:2.6px;color:#8c8a9f;line-height:1.7;font-weight:800}
+    .nav-links{display:flex;align-items:center;gap:30px;color:#5f6074;font-size:13px;font-weight:750}
+    .nav-links a:hover{color:var(--purple)}
+    .nav-cta{padding:12px 19px;border-radius:99px;background:#171729;color:white;border:0;font-size:13px;font-weight:800;box-shadow:0 8px 20px #1717291a}
+    .hero{padding-block:26px 26px}
+    .hero-panel{background:radial-gradient(ellipse 68% 76% at 78% 26%,#34307e 0%,transparent 70%),radial-gradient(ellipse at 20% 125%,#2e2164,transparent 53%),#10112a;color:white;border-radius:32px;min-height:505px;position:relative;overflow:hidden;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;padding:65px 67px}
+    .hero-panel:before{content:"";position:absolute;inset:0;opacity:.38;pointer-events:none;background-image:radial-gradient(#9992ff 1px,transparent 1px);background-size:27px 27px;mask-image:linear-gradient(to left,#000,transparent 60%)}
+    .hero-copy{z-index:2;position:relative;max-width:570px}
+    .pill{display:inline-flex;align-items:center;gap:9px;border:1px solid #a8a1df65;border-radius:99px;background:#7973ba1c;padding:9px 14px;font-size:11px;font-weight:800;letter-spacing:1.25px;text-transform:uppercase;color:#ddd8ff}
+    .live-dot{width:7px;height:7px;background:#47ddbd;box-shadow:0 0 0 4px #5bf3bc1a;border-radius:50%}
+    h1{font-size:clamp(45px,5vw,72px);line-height:1.04;letter-spacing:-4px;font-weight:900;margin:24px 0 20px;max-width:650px}
+    h1 em{font-family:Georgia,serif;font-weight:500;color:#bcaaff;letter-spacing:-3px}
+    .hero-copy>p{font-size:16px;line-height:1.8;color:#c8c8e0;max-width:450px;margin:0 0 29px}
+    .hero-actions{display:flex;gap:11px;flex-wrap:wrap;align-items:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:99px;padding:15px 21px;font-weight:800;font-size:13px;min-height:48px;transition:transform .2s,box-shadow .2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:#5582ff;color:white;box-shadow:0 12px 25px #3864fd37}
+    .btn-light{background:#ffffff15;color:#f7f5ff;border:1px solid #ffffff45}
+    .btn-outline{border:1px solid var(--line);background:#fff;color:#27273e}
+    .btn-dark{background:#191930;color:white}
+    .hero-art{position:relative;height:355px;min-width:0;transform:translateX(10px)}
+    .orbit{position:absolute;inset:20px 5px 0 20px;border:1px solid #8986d842;border-radius:50%;transform:rotate(-20deg)}
+    .orbit.two{inset:57px 57px 23px 60px;transform:rotate(30deg);border-color:#8d6be63a}
+    .star{position:absolute;width:4px;height:4px;background:#f4d7a4;border-radius:50%;box-shadow:0 0 12px #ffd994}
+    .art-glow{position:absolute;inset:25px 35px 10px;filter:blur(60px);background:#765bcd70;border-radius:50%}
+    .floating-book{position:absolute;width:194px;height:277px;border-radius:10px 18px 19px 9px;overflow:hidden;box-shadow:15px 25px 25px #050519aa,inset -8px 0 12px #ffffff13;transform-style:preserve-3d;display:flex;flex-direction:column;justify-content:space-between;padding:24px 19px;border-left:9px solid #ffffff40}
+    .floating-book strong{font-size:23px;letter-spacing:-.85px;line-height:1.13;position:relative;z-index:2}
+    .floating-book small{font-size:9px;font-weight:850;letter-spacing:1px;opacity:.7}
+    .fb-icon{width:105px;height:105px;opacity:.75;align-self:center;filter:drop-shadow(0 8px 16px #0004)}
+    .fb-one{top:20px;left:10%;background:linear-gradient(145deg,#7865e7,#30266d);transform:rotate(-19deg) perspective(500px) rotateY(-10deg);z-index:1}
+    .fb-two{top:3px;left:36%;background:linear-gradient(140deg,#24436d,#101a32);transform:rotate(1deg);z-index:3;box-shadow:14px 27px 45px #050519cd}
+    .fb-three{top:31px;right:5%;background:linear-gradient(140deg,#db7b56,#57204b);transform:rotate(17deg);z-index:2}
+    .hero-stat{position:absolute;bottom:-13px;right:0;z-index:8;display:flex;gap:10px;background:#ffffff19;border:1px solid #ffffff30;padding:12px 15px;border-radius:14px;backdrop-filter:blur(14px);align-items:center;font-size:12px;color:#dedcfb;font-weight:700;box-shadow:0 18px 35px #08082477}
+    .hero-stat strong{color:white;font-size:18px}
+    .section-kicker{color:#775dee;font-size:11px;font-weight:900;letter-spacing:2.5px;text-transform:uppercase;margin:0 0 8px}
+    .section-heading{display:flex;justify-content:space-between;align-items:end;gap:20px;margin:0 0 24px}
+    .section-heading h2{margin:0;font-size:clamp(28px,3vw,40px);line-height:1.1;letter-spacing:-1.9px}
+    .section-heading p{margin:8px 0 0;max-width:630px;color:#77788c;line-height:1.6;font-size:14px}
+    .section-heading .count{font-size:12px;color:#a0a0af;font-weight:700;white-space:nowrap}
+    .bookshelf-section{padding-block:45px 30px}
+    /* Estantería interactiva: un libro abierto y los demás de lomo. */
+    .shelf{position:relative;border-radius:27px;background:radial-gradient(ellipse at 55% 5%,#fff 0%,#ebeaf5 58%,#e1deed 100%);border:1px solid #e0e0ea;padding:15px 20px 24px;overflow:hidden;box-shadow:inset 0 1px 0 white,0 14px 35px #27244b0b}
+    .shelf-viewport{height:400px;overflow:hidden;position:relative;touch-action:pan-y;user-select:none}
+    .shelf-viewport:after{content:"";position:absolute;bottom:12px;left:10px;right:10px;height:15px;background:linear-gradient(180deg,#9992b0,#dad7e7);border-radius:4px 4px 9px 9px;box-shadow:0 9px 12px #4a426835;z-index:1;pointer-events:none}
+    .spines{height:100%;display:flex;align-items:flex-end;gap:7px;width:max-content;padding:15px 12px 28px;position:relative;transition:transform .48s cubic-bezier(.22,1,.36,1);will-change:transform}
+    .shelf-book{height:272px;flex:0 0 49px;width:49px;border:0;position:relative;display:block;padding:0;overflow:visible;border-radius:6px 9px 7px 4px;background:linear-gradient(155deg,var(--c1),var(--c2));box-shadow:4px 9px 10px #1c193a29,inset 4px 0 5px #ffffff3c,inset -4px 0 7px #0005;transition:flex-basis .45s cubic-bezier(.22,1,.36,1),width .45s cubic-bezier(.22,1,.36,1),height .45s cubic-bezier(.22,1,.36,1),box-shadow .3s;cursor:pointer;outline-offset:4px;color:#fff;isolation:isolate}
+    .shelf-book:hover:not(.is-open){box-shadow:6px 13px 15px #1c193a50,inset 4px 0 5px #ffffff4c,inset -4px 0 7px #0005}
+    .shelf-book:focus-visible{outline:3px solid #306dff}
+    .shelf-book.is-open{flex-basis:245px;width:245px;height:348px;z-index:2;box-shadow:7px 13px 24px #16112d45,19px 20px 30px #1d1c3a30;border-radius:6px 13px 13px 4px;cursor:zoom-in}
+    .shelf-book:before{content:"";position:absolute;left:-7px;top:4px;width:9px;height:calc(100% - 4px);background:linear-gradient(90deg,#171124,#bcb4d0 42%,#2e244e);transform:skewY(-7deg);border-radius:3px 0 0 2px;z-index:2}
+    .shelf-spine{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:12px 6px;transition:opacity .15s;opacity:1;overflow:hidden}
+    .shelf-spine-title{writing-mode:vertical-rl;transform:rotate(180deg);font-size:12px;font-weight:800;line-height:1.1;max-height:205px;overflow:hidden;text-overflow:ellipsis;letter-spacing:-.15px}
+    .shelf-spine-num{position:absolute;top:9px;font-weight:850;opacity:.8;font-size:10px}
+    .shelf-spine-brand{position:absolute;bottom:10px;opacity:.88;font-weight:950;font-size:10px}
+    .shelf-book.is-open .shelf-spine{opacity:0;pointer-events:none}
+    .shelf-front{position:absolute;inset:0;border-radius:6px 13px 13px 4px;overflow:hidden;opacity:0;transition:opacity .25s;display:block;background:radial-gradient(circle at 65% 42%,var(--c3),transparent 64%),linear-gradient(145deg,var(--c1),var(--c2));text-align:left}
+    .shelf-book.is-open .shelf-front{opacity:1}
+    .shelf-front:after{content:"";pointer-events:none;position:absolute;inset:0;border-left:7px solid #ffffff23;box-shadow:inset -4px 0 8px #0505144a,inset 0 1px 0 #ffffff3f;z-index:4}
+    .shelf-cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .shelf-front-info{position:absolute;inset:0;padding:19px 18px 20px;display:flex;flex-direction:column;justify-content:space-between}
+    .shelf-front.has-image .shelf-front-info{display:none}
+    .shelf-front.no-image .shelf-front-info{display:flex}
+    .shelf-front-head,.shelf-front-foot{display:flex;justify-content:space-between;align-items:center;gap:5px;font-size:9px;letter-spacing:.8px;font-weight:900}
+    .shelf-front-body{text-align:center;display:grid;justify-items:center;gap:10px}
+    .shelf-front-body .cover-icon{width:93px;height:93px;margin:2px auto}
+    .shelf-front-body strong{font-size:24px;line-height:1.13;letter-spacing:-.7px}
+    .shelf-front-foot{border-top:1px solid #ffffff40;padding-top:11px;font-size:8px;opacity:.85}
+    .shelf-controls{display:grid;grid-template-columns:48px minmax(0,1fr) 48px;gap:15px;align-items:center;max-width:760px;margin:5px auto 0;position:relative;z-index:2}
+    .shelf-arrow{width:46px;height:46px;border:1px solid #d8d4e5;border-radius:50%;background:#fff;color:#403c59;box-shadow:0 5px 13px #25214415;font-size:29px;font-weight:300;display:grid;place-items:center;line-height:1;transition:background .2s,transform .2s}
+    .shelf-arrow:hover:not(:disabled){background:#e9e5fa;transform:translateY(-2px)}
+    .shelf-arrow:disabled{opacity:.35;cursor:default}
+    .shelf-current{text-align:center;min-height:121px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px}
+    .shelf-current .shelf-number{font-size:11px;color:#376dff;font-weight:900;letter-spacing:1px;text-transform:uppercase}
+    .shelf-current h3{font-size:clamp(16px,2.2vw,23px);letter-spacing:-.5px;line-height:1.19;margin:0;max-width:570px}
+    .shelf-current .shelf-open{background:#2575fa;border:0;border-radius:999px;color:white;font-size:12px;font-weight:850;padding:12px 22px;box-shadow:0 7px 17px #3272e038;transition:background .2s}
+    .shelf-current .shelf-open:hover{background:#1555d8}
+    .spine-note{margin:5px 4px 0;font-size:11px;color:#858093;text-align:center;position:relative;z-index:4}
+    .collection-section{padding-top:40px;padding-bottom:85px}
+    .toolbar{display:flex;gap:15px;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap}
+    .searchbox{height:47px;position:relative;width:min(360px,100%);flex-shrink:0}
+    .searchbox svg{position:absolute;top:14px;left:16px;color:#888a9c}
+    .searchbox input{height:100%;width:100%;border:1px solid #e1e2ed;border-radius:15px;background:white;padding:0 15px 0 46px;color:#222;box-shadow:0 3px 11px #30305105;outline:none}
+    .searchbox input:focus{border-color:#9784ff;box-shadow:0 0 0 3px #7255ff18}
+    .filters{display:flex;gap:7px;flex-wrap:wrap}
+    .filter{background:white;color:#7b7b8b;border:1px solid #e7e6f0;padding:10px 13px;border-radius:50px;font-size:11px;font-weight:800;transition:.2s}
+    .filter[aria-pressed="true"]{color:white;background:#262044;border-color:#262044}
+    .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+    .card{background:#fff;border:1px solid #e8e8f1;border-radius:23px;overflow:hidden;box-shadow:0 8px 28px #24245008;transition:transform .25s,box-shadow .25s;min-width:0;display:flex;flex-direction:column}
+    .card:hover{transform:translateY(-5px);box-shadow:0 20px 37px #24245017}
+    .cover{aspect-ratio:3/3.9;color:white;position:relative;isolation:isolate;overflow:hidden;border-radius:17px;margin:12px 12px 0;display:flex;flex-direction:column;justify-content:space-between;padding:19px 18px 17px;background:linear-gradient(135deg,var(--c1),var(--c2));min-height:0}
+    .cover:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(circle at 70% 40%,var(--c3),transparent 60%)}
+    .cover:after{content:"";position:absolute;inset:0;z-index:-1;opacity:.28;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:25px 25px;mask-image:linear-gradient(0deg,transparent 10%,black 90%)}
+    .cover-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transition:transform .3s}
+    .card:hover .cover-img{transform:scale(1.03)}
+    .cover-overlay{position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,#0c072e66 0%,transparent 35%,#0b0b29dd 100%)}
+    .cover-top,.cover-body,.cover-bottom{position:relative;z-index:1}
+    .cover-top,.cover-bottom{display:flex;align-items:center;justify-content:space-between;gap:6px;font-weight:850;font-size:9px;letter-spacing:.8px}
+    .cover-top .mini-logo{display:flex;gap:3px;align-items:center;background:#ffffff26;border:1px solid #ffffff46;border-radius:7px;padding:5px 7px}
+    .cover-icon{width:94px;height:94px;color:#fff;display:block;margin:9px auto 17px;filter:drop-shadow(0 12px 12px #0003)}
+    .cover h3{margin:0;font-size:clamp(20px,2vw,27px);letter-spacing:-.9px;line-height:1.07;text-wrap:balance}
+    .cover h3 em{font-style:normal;color:var(--highlight)}
+    .cover-bottom{border-top:1px solid #ffffff35;padding-top:12px;color:#f7f7ffbb}
+    .card-details{padding:14px 17px 18px;flex:1;display:flex;flex-direction:column;gap:8px}
+    .chips{display:flex;flex-wrap:wrap;gap:6px}
+    .chip{font-size:10px;font-weight:800;color:#5269a2;background:#eaf0ff;border-radius:20px;padding:6px 9px}
+    .chip.alt{color:#727184;background:#f1f0f6}
+    .card-details h4{margin:4px 0 0;font-size:16px;line-height:1.28;letter-spacing:-.36px;min-height:41px}
+    .card-details p{margin:0;color:#8b8b9b;font-size:12px;line-height:1.55;flex:1}
+    .card-foot{display:flex;justify-content:space-between;align-items:center;padding-top:9px;gap:8px}
+    .card-foot small{font-size:10px;font-weight:750;color:#a0a0ad}
+    .read-link{background:#f2f1fc;color:#664de2;border:0;border-radius:99px;padding:10px 12px;font-size:11px;font-weight:850}
+    .read-link:hover{background:#e6e2ff}
+    .empty{display:none;border:1px dashed #b6b0d4;border-radius:15px;padding:48px;text-align:center;color:#777}
+    .process-section{padding:65px 0;background:#fff;border-top:1px solid #eaeaf2;border-bottom:1px solid #eaeaf2}
+    .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:17px;margin-top:28px}
+    .step{border-radius:21px;background:#f7f6fc;border:1px solid #e9e7f1;padding:26px;min-height:206px}
+    .step .index{display:inline-block;color:#7165df;font-size:13px;letter-spacing:1px;font-weight:900}
+    .step h3{font-size:18px;letter-spacing:-.7px;margin:27px 0 9px}
+    .step p{font-size:12px;line-height:1.7;color:#77788b;margin:0}
+    .note-strip{margin-top:22px;display:flex;align-items:center;gap:9px;color:#7a798e;font-size:12px;line-height:1.6}
+    .access-section{padding-block:72px 95px}
+    .access-card{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:30px;border-radius:28px;padding:47px 50px;color:#fff;background:radial-gradient(circle at 90% 0%,#5b3dbc,transparent 55%),#1b193b;position:relative;overflow:hidden}
+    .access-card h2{margin:0 0 15px;letter-spacing:-1.8px;font-size:35px;line-height:1.14}
+    .access-card p{margin:0 0 22px;color:#cac9e6;max-width:560px;line-height:1.75;font-size:14px}
+    .access-box{background:#ffffff12;border:1px solid #ffffff2c;padding:23px;border-radius:21px;backdrop-filter:blur(6px)}
+    .access-box .bullet{display:flex;gap:10px;align-items:center;margin-bottom:14px;font-size:12px;color:#e0ddf6;font-weight:750}
+    .access-box .bullet:before{content:'✓';display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:#48d7ae35;color:#7aebce;flex:none}
+    footer{border-top:1px solid #dedeea;background:#f0f0f7;color:#89899e;padding:28px 0 39px;font-size:12px}
+    footer .container{display:flex;justify-content:space-between;gap:16px;align-items:center}
+    footer strong{color:#222140;letter-spacing:.3px}
+    .modal-backdrop{position:fixed;inset:0;z-index:100;background:#0d0d24bd;backdrop-filter:blur(7px);display:none;align-items:center;justify-content:center;padding:22px;overflow-y:auto}
+    .modal-backdrop.open{display:flex}
+    .modal{background:white;width:min(890px,100%);max-height:min(90dvh,930px);border-radius:28px;overflow:auto;box-shadow:0 35px 110px #0006;position:relative;scrollbar-width:thin}
+    .modal-close{position:sticky;float:right;top:15px;margin:15px 15px -65px 0;z-index:10;border:0;border-radius:50%;background:#f2f1f8;color:#43415c;width:41px;height:41px;display:grid;place-items:center;font-size:24px;line-height:1;box-shadow:0 2px 12px #1c17331a}
+    .modal-hero{background:radial-gradient(at 80% 40%,var(--mc3),transparent 60%),linear-gradient(120deg,var(--mc1),var(--mc2));color:#fff;padding:48px 48px 39px;min-height:250px;position:relative;overflow:hidden}
+    .modal-hero:after{content:'04 / IA';font-weight:950;letter-spacing:-7px;font-size:145px;position:absolute;right:-5px;bottom:-48px;color:#ffffff13;pointer-events:none}
+    .modal-kicker{font-size:11px;font-weight:850;letter-spacing:2px;opacity:.82}
+    .modal-hero h2{font-size:clamp(29px,5vw,48px);line-height:1.08;letter-spacing:-1.8px;max-width:690px;margin:22px 0 12px;position:relative;z-index:1}
+    .modal-hero p{font-size:14px;line-height:1.55;color:#ffffffdb;max-width:590px;margin:0;position:relative;z-index:1}
+    .modal-body{padding:34px 48px 42px}
+    .meta-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+    .meta-row span{border-radius:99px;background:#f1f0f8;color:#64627d;padding:9px 13px;font-size:11px;font-weight:800}
+    .essay-sections{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:28px}
+    .essay-section{border:1px solid #e8e7ef;padding:20px;border-radius:18px;background:#fbfbfd}
+    .essay-section h3{font-size:15px;margin:0 0 9px;letter-spacing:-.3px}
+    .essay-section p{font-size:13px;line-height:1.65;color:#717184;margin:0}
+    .locked-panel{border:1px solid #e6e1f6;background:linear-gradient(140deg,#faf8ff,#f4f2fb);border-radius:18px;padding:23px;display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .locked-panel h3{margin:0 0 5px;font-size:16px}.locked-panel p{margin:0;color:#88839a;font-size:12px;line-height:1.6}
+    .modal-actions{display:flex;gap:9px;flex-wrap:wrap}
+    .small-modal{width:min(490px,100%);padding:42px 36px;text-align:center}
+    .small-modal .lock-icon{display:inline-grid;place-items:center;width:63px;height:63px;background:#eeeafb;border-radius:19px;color:#6049d2;font-size:26px;margin-bottom:13px}
+    .small-modal h2{font-size:26px;letter-spacing:-1px;line-height:1.1;margin:4px 0 11px}
+    .small-modal p{font-size:13px;color:#76748b;line-height:1.7;margin:0 auto 24px;max-width:380px}
+    .small-modal .modal-actions{justify-content:center}
+    .toast{position:fixed;bottom:23px;left:50%;transform:translate(-50%,30px);background:#22203d;color:white;padding:13px 20px;border-radius:99px;font-size:12px;font-weight:750;z-index:150;box-shadow:0 15px 30px #0003;opacity:0;pointer-events:none;transition:.25s;max-width:90%;text-align:center}
+    .toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(max-width:1050px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero-panel{padding:52px 42px}.hero-art{transform:scale(.85);transform-origin:center right}.hero h1{font-size:54px}.steps{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:760px){.container{padding-inline:18px}nav{height:68px}.nav-links{display:none}.brand{font-size:17px}.logo{width:40px;height:40px}.hero{padding-top:13px}.hero-panel{padding:35px 25px 25px;display:block;min-height:0;border-radius:25px}.hero h1{font-size:47px;letter-spacing:-2.9px;margin:21px 0 16px}.hero-copy>p{font-size:14px;line-height:1.72}.hero-art{height:250px;transform:scale(.70);transform-origin:center center;margin:-4px -30px -18px}.hero-stat{bottom:0;right:10px}.floating-book{width:165px;height:236px;padding:19px 14px}.floating-book strong{font-size:20px}.fb-two{left:35%}.fb-one{left:8%}.fb-three{right:4%}.bookshelf-section{padding-top:34px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.cover{margin:8px 8px 0;border-radius:12px;padding:11px 10px 9px}.cover h3{font-size:19px;letter-spacing:-.75px}.cover-icon{width:59px;height:59px;margin:3px auto 8px}.cover-top{font-size:8px}.cover-bottom{font-size:8px;padding-top:7px}.card{border-radius:17px}.card-details{padding:10px 11px 13px}.card-details h4{font-size:13px;min-height:49px}.card-details p{font-size:10px}.chip{font-size:9px;padding:5px 7px}.read-link{padding:8px 10px;font-size:10px}.card-foot small{font-size:9px}.toolbar{align-items:stretch;flex-direction:column}.searchbox{width:100%}.section-heading h2{font-size:30px}.steps{grid-template-columns:1fr 1fr;gap:10px}.step{min-height:0;padding:17px}.step h3{font-size:16px;margin:18px 0 7px}.step p{font-size:11px}.access-card{grid-template-columns:1fr;padding:32px 25px}.access-card h2{font-size:30px}.modal{max-height:93dvh}.modal-hero{padding:39px 24px 28px}.modal-body{padding:25px 23px 29px}.essay-sections{grid-template-columns:1fr}.locked-panel{align-items:stretch;flex-direction:column}.small-modal{padding:35px 24px}.collection-section{padding-bottom:55px}.nav-cta{padding:10px 13px}}
+    @media(max-width:390px){.hero h1{font-size:41px}.cover h3{font-size:17px}.card-details h4{font-size:12px}.card-foot{flex-direction:column;align-items:stretch}.read-link{width:100%}.hero-art{margin-left:-48px;margin-right:-48px}}
+    @media(max-width:760px){
+      .shelf{padding:12px 10px 17px;border-radius:23px}
+      .shelf-viewport{height:315px}
+      .spines{gap:5px;padding:12px 8px 23px}
+      .shelf-book{flex-basis:40px;width:40px;height:203px}
+      .shelf-book.is-open{flex-basis:206px;width:206px;height:283px}
+      .shelf-spine-title{font-size:10px;max-height:153px}
+      .shelf-front-info{padding:16px 12px}
+      .shelf-front-body strong{font-size:20px}
+      .shelf-front-body .cover-icon{width:66px;height:66px}
+      .shelf-controls{grid-template-columns:40px minmax(0,1fr) 40px;gap:5px;margin-top:8px}
+      .shelf-arrow{height:39px;width:39px;font-size:26px}
+      .shelf-current{min-height:119px;gap:6px}
+      .shelf-current h3{font-size:15px}
+      .shelf-current .shelf-number{font-size:10px}
+      .shelf-current .shelf-open{padding:10px 18px;font-size:11px}
+      .spine-note{font-size:10px;line-height:1.5;margin-top:5px}
+    }
+    @media(max-width:390px){.shelf-book.is-open{flex-basis:194px;width:194px;height:271px}.shelf-viewport{height:303px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+    /* Artículos de los libros: lectura larga, demostración visual y navegación interna. */
+    .reader-modal{width:min(990px,100%);max-height:min(94dvh,1100px);background:#f7f7fc}
+    .reader-modal .modal-close{background:#fff;box-shadow:0 8px 25px #0002}
+    .reader-hero{display:grid;grid-template-columns:minmax(0,1.2fr) 230px;gap:25px;align-items:center;padding:50px 44px 44px;min-height:340px}
+    .reader-hero:after{content:'4 IA';font-size:130px;right:13px;bottom:-22px;opacity:.3}
+    .reader-cover{width:200px;height:270px;background:linear-gradient(145deg,var(--mc3),var(--mc2));border-radius:10px 18px 18px 10px;border-left:8px solid #ffffff43;box-shadow:14px 20px 34px #0005;position:relative;z-index:2;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:18px}
+    .reader-cover img{position:absolute;width:100%;height:100%;object-fit:cover;inset:0}
+    .reader-cover-fallback{display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px;color:#fff;font-size:17px;font-weight:850;line-height:1.15}
+    .reader-cover-fallback svg{width:90px;height:90px;color:#fff}
+    .reader-cover:has(img) .reader-cover-fallback{display:none}
+    .reader-hero-text{position:relative;z-index:2;min-width:0}
+    .reader-hero .reader-hero-text h2{font-size:clamp(29px,4vw,45px);margin:16px 0;max-width:600px}
+    .reader-hero .reader-hero-text p{max-width:520px;line-height:1.7}
+    .reader-hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+    .reader-hero-actions a,.reader-hero-actions button{font-size:12px;padding:11px 17px;min-height:40px}
+    .reader-body{padding:0 40px 42px}
+    .reader-overview{background:#fff;border:1px solid #e9e8f2;border-radius:22px;padding:23px 25px;margin-top:25px;margin-bottom:22px;box-shadow:0 5px 18px #24204c08}
+    .reader-overview h3{font-size:24px;letter-spacing:-.8px;margin:5px 0 11px}
+    .reader-overview p{font-size:14px;line-height:1.75;color:#65657c;margin:0}
+    .reader-progress-nav{position:sticky;top:-1px;z-index:7;display:flex;gap:6px;padding:8px;margin:0 -4px 20px;background:#eeedf6ef;border:1px solid #ffffffdf;border-radius:18px;backdrop-filter:blur(15px);box-shadow:0 6px 22px #25204412;overflow:auto;scrollbar-width:none}
+    .reader-progress-nav::-webkit-scrollbar{display:none}
+    .reader-tab{border:0;background:transparent;color:#6e6d83;padding:11px 14px;border-radius:12px;font-size:12px;font-weight:750;white-space:nowrap;flex:1}
+    .reader-tab[aria-current=true],.reader-tab:hover{background:#fff;color:#28263e;box-shadow:0 4px 12px #16143012}
+    .reader-block{scroll-margin-top:79px;padding:15px 0 22px}
+    .reader-block-kicker{font-size:11px;font-weight:900;letter-spacing:1.6px;color:#795bdb;margin:0 0 10px}
+    .reader-block h3{margin:0 0 14px;font-size:clamp(25px,3.4vw,36px);letter-spacing:-1.45px;line-height:1.15;color:#202037}
+    .reader-block h3 em{font:italic 500 1em Georgia,serif;color:#7662dd;letter-spacing:-1.25px}
+    .reader-block>p{font-size:14px;line-height:1.8;color:#6a697e;margin:0 0 20px;max-width:820px}
+    .reader-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0 6px}
+    .reader-fact{padding:22px 16px;border-radius:17px;background:#221c50;color:#fff;min-height:112px}
+    .reader-fact strong{font-size:clamp(22px,3.4vw,32px);display:block;letter-spacing:-1px}
+    .reader-fact span{display:block;margin-top:6px;color:#c5bfee;font-size:12px}
+    .reader-split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .reader-info-card{padding:21px;border:1px solid #e7e5f0;background:#fff;border-radius:20px}
+    .reader-info-card span{font-size:10px;letter-spacing:1.3px;font-weight:900;color:#7462cf}
+    .reader-info-card h4{font-size:17px;letter-spacing:-.5px;margin:9px 0 7px}
+    .reader-info-card p{color:#727186;font-size:13px;line-height:1.7;margin:0}
+    .demo-theater{display:grid;grid-template-columns:.96fr 1.04fr;background:#1e1b46;border-radius:23px;overflow:hidden;box-shadow:0 18px 28px #19153114;margin-top:20px}
+    .demo-visual{min-height:315px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;isolation:isolate;padding:25px;background:radial-gradient(circle at 40% 38%,var(--demo-b,#725bd2),transparent 72%),linear-gradient(155deg,#292052,#101831);overflow:hidden;color:#fff;text-align:center}
+    .demo-visual:before{content:'';position:absolute;inset:0;background-image:linear-gradient(#ffffff10 1px,transparent 1px),linear-gradient(90deg,#ffffff10 1px,transparent 1px);background-size:29px 29px;transform:perspective(350px) rotateX(45deg) scale(1.5);opacity:.5;z-index:-1}
+    .demo-glow{position:absolute;width:190px;height:190px;left:50%;top:45%;transform:translate(-50%,-50%);border-radius:50%;background:var(--demo-b,#725bd2);filter:blur(60px);opacity:.3;pointer-events:none}
+    .demo-symbol{width:155px;height:155px;filter:drop-shadow(0 14px 18px #0005);transition:transform .35s ease;color:#e7e5ff;position:relative;z-index:2}
+    .demo-visual:hover .demo-symbol{transform:translateY(-5px) rotate(-3deg)}
+    .demo-symbol svg{width:100%;height:100%}
+    .demo-number{display:block;font-size:clamp(20px,3vw,29px);font-weight:900;letter-spacing:-1px;position:relative;z-index:2;margin:5px 0 9px;text-shadow:0 2px 15px #0005}
+    .demo-indicator{font-size:10px;letter-spacing:1.4px;font-weight:850;border-radius:99px;background:#ffffff26;border:1px solid #ffffff35;color:#fff;padding:8px 13px;position:relative;z-index:2}
+    .demo-caption{padding:30px 28px;color:white;display:flex;flex-direction:column;justify-content:center}
+    .demo-caption .chapter-count{font-size:11px;color:#b8abf8;font-weight:800;letter-spacing:1.6px}
+    .demo-caption h4{font-size:26px;letter-spacing:-1px;line-height:1.2;margin:13px 0 14px}
+    .demo-caption p{font-size:13px;color:#d2cee9;line-height:1.8;margin:0 0 23px}
+    .demo-arrows{display:flex;align-items:center;gap:12px}
+    .demo-arrows button{border:1px solid #ffffff45;background:#ffffff1c;color:#fff;width:38px;height:38px;border-radius:50%;font-size:23px;line-height:1}
+    .demo-arrows button:disabled{opacity:.3;cursor:default}
+    .demo-arrows span{font-size:12px;color:#c5c0df;font-weight:750}
+    .chapter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}
+    .chapter-card{cursor:pointer;text-align:left;border:1px solid #e7e5f0;background:#fff;border-radius:19px;padding:18px 19px;transition:border-color .2s,box-shadow .2s,transform .2s}
+    .chapter-card:hover{transform:translateY(-2px)}
+    .chapter-card[aria-pressed=true]{border-color:#947afa;box-shadow:0 0 0 2px #9984f73a}
+    .chapter-card small{color:#7962da;letter-spacing:1px;font-size:11px;font-weight:900}
+    .chapter-card strong{display:block;margin:8px 0;font-size:16px;line-height:1.35;letter-spacing:-.4px}
+    .chapter-card p{font-size:12px;color:#77778a;line-height:1.7;margin:0}
+    .reader-takeaways{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+    .reader-takeaway{padding:22px 19px;border-radius:20px;background:#fff;border:1px solid #e7e5f0}
+    .reader-takeaway span{display:grid;place-items:center;background:#ebe7ff;color:#6852d4;border-radius:50%;width:32px;height:32px;font-size:14px;font-weight:900;margin-bottom:19px}
+    .reader-takeaway h4{font-size:15px;margin:0 0 8px;line-height:1.35}
+    .reader-takeaway p{font-size:12px;line-height:1.65;color:#737388;margin:0}
+    .reader-quote{border-left:4px solid #8064dd;background:linear-gradient(120deg,#eeeaff,#f8f8ff);padding:26px 29px;border-radius:6px 19px 19px 6px;font-size:21px;line-height:1.55;color:#2f2a53;font-weight:750;letter-spacing:-.4px}
+    .reader-disclaimer{background:#f1eff8;border:1px solid #e4e1f1;padding:16px 19px;border-radius:15px;font-size:12px;color:#67627e;line-height:1.7;margin:20px 0}
+    .reader-cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+    .reader-cta{border-radius:24px;padding:25px 24px;background:#201b4d;color:#fff;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+    .reader-cta:nth-child(2){background:linear-gradient(145deg,#edf3ff,#e8e5ff);color:#252242;border:1px solid #dbd7f3}
+    .reader-cta .cta-flag{color:#ac9cf9;font-size:10px;font-weight:850;letter-spacing:1.5px}
+    .reader-cta:nth-child(2) .cta-flag{color:#6156b9}
+    .reader-cta h4{font-size:20px;line-height:1.25;margin:0;letter-spacing:-.6px}
+    .reader-cta p{font-size:12px;line-height:1.7;color:#d6d0f0;flex:1;margin:0}
+    .reader-cta:nth-child(2) p{color:#74718a}
+    .reader-cta .btn{margin-top:8px;font-size:12px;min-height:42px}
+    .reader-source{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+    .reader-source a{font-size:12px;color:#4c43a9;font-weight:750;background:#ebe9f8;border-radius:12px;padding:10px 13px;word-break:break-word}
+    .reader-source a:hover{background:#ddd7fb}
+    @media(max-width:760px){
+      .reader-modal{height:100dvh;max-height:100dvh;width:100%;border-radius:0}
+      .modal-backdrop:has(.reader-modal){padding:0}
+      .reader-hero{display:flex;flex-direction:column-reverse;gap:22px;padding:58px 23px 28px;text-align:left}
+      .reader-hero:after{font-size:105px}
+      .reader-hero .reader-cover{width:164px;height:216px;align-self:center}
+      .reader-hero .reader-hero-text h2{font-size:30px;letter-spacing:-1.3px}
+      .reader-body{padding:0 18px 40px}
+      .reader-overview{padding:21px;margin-top:17px}
+      .reader-overview h3{font-size:21px}
+      .reader-progress-nav{border-radius:15px;margin:0 -3px 18px;top:0}
+      .reader-tab{flex:0 0 auto;padding:10px 13px;font-size:11px}
+      .reader-block{padding:13px 0 22px}
+      .reader-block h3{font-size:28px}
+      .reader-block>p{font-size:13px}
+      .reader-facts{gap:7px}.reader-fact{padding:15px 10px;min-height:94px}.reader-fact strong{font-size:21px}.reader-fact span{font-size:10px}
+      .reader-split,.chapter-grid,.reader-cta-grid{grid-template-columns:1fr}
+      .reader-takeaways{grid-template-columns:1fr}
+      .reader-takeaway{display:grid;grid-template-columns:34px 1fr;gap:0 11px;padding:18px}
+      .reader-takeaway span{grid-row:1/3;margin:0}
+      .demo-theater{grid-template-columns:1fr}
+      .demo-visual{min-height:235px}.demo-symbol{width:120px;height:120px}.demo-caption{padding:24px}
+      .demo-caption h4{font-size:21px}.demo-caption p{font-size:12px}
+      .chapter-card{padding:16px}.reader-quote{font-size:18px;padding:21px}
+    }
+
+    /* Mini-escenarios independientes para que cada demostración tenga identidad. */
+    .demo-symbol{width:min(270px,100%);height:155px;display:grid;place-items:center}
+    .demo-scene{width:100%;height:145px;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;font-weight:850}
+    .scene-ai-row{display:flex;gap:7px;align-items:center;justify-content:center}
+    .scene-ai{height:41px;min-width:48px;display:flex;align-items:center;justify-content:center;border:1px solid #ffffff60;border-radius:13px;box-shadow:0 8px 20px #0004;color:white;font-size:12px;letter-spacing:-.3px;padding:7px;background:#ffffff15}
+    .scene-ai:nth-child(1){border-color:#63e3b5;box-shadow:0 0 12px #49b59a55}.scene-ai:nth-child(2){border-color:#fd9b61;box-shadow:0 0 12px #f5955c55}.scene-ai:nth-child(3){border-color:#70ccff;box-shadow:0 0 12px #5ac6f35a}.scene-ai:nth-child(4){border-color:#bdc4cf;box-shadow:0 0 12px #ffffff3a}
+    .scene-caption{color:#c9d4ff;font-size:9px;letter-spacing:1.2px;text-transform:uppercase}
+    .scene-mate-grid{display:flex;gap:7px;justify-content:center;align-items:end}
+    .scene-playing-card{height:104px;width:68px;border-radius:10px;background:linear-gradient(160deg,#fff,#e6e7f0);color:#4b356e;border:3px solid #fff;box-shadow:6px 11px 20px #0b102a8a;display:flex;align-items:center;justify-content:center;font:800 38px Georgia,serif}
+    .scene-playing-card:nth-child(1){transform:rotate(-13deg) translateX(9px)}.scene-playing-card:nth-child(2){transform:translateY(-10px)}.scene-playing-card:nth-child(3){transform:rotate(13deg) translateX(-9px)}
+    .scene-score{display:flex;align-items:center;justify-content:center;gap:13px;min-height:92px}
+    .scene-score .metric{background:#ffffff14;border:1px solid #ffffff44;border-radius:15px;padding:12px 15px;font-size:11px;color:#e2ddff}
+    .scene-score .metric strong{display:block;font-size:26px;color:white}
+    .scene-island .sun{position:absolute;width:75px;height:75px;border-radius:50%;background:#d8ffb6;right:19px;top:4px;box-shadow:0 0 45px #d8ffb6a9}
+    .scene-island .land{position:absolute;width:220px;height:55px;border-radius:50%;background:linear-gradient(170deg,#daca8c,#417e78);bottom:0;box-shadow:0 13px 0 #07587a,0 24px 30px #0006}
+    .scene-island .island-tree{position:relative;z-index:1;margin-bottom:9px;color:#c4ffcd}.scene-island .island-tree svg{width:100px;height:100px}
+    .scene-funds{background:linear-gradient(160deg,#184b46,#0c2a44);border:1px solid #75ecd17a;border-radius:19px;box-shadow:0 15px 25px #0006;width:220px;padding:14px 10px;text-align:center}
+    .scene-funds small{font-size:10px;color:#93ecce;letter-spacing:2px}.scene-funds strong{font-size:29px;display:block;margin:4px 0;color:#fff;letter-spacing:-1px}
+    .scene-chat{display:flex;gap:7px;flex-direction:column;align-items:center}
+    .scene-chat .msg{background:#ffffff24;border:1px solid #ffffff43;border-radius:8px 16px 16px 16px;padding:8px 11px;min-width:150px;text-align:left;font-size:11px;box-shadow:0 5px 15px #0b10204d}
+    .scene-chat .msg:nth-child(even){transform:translateX(18px)}.scene-chat .msg:nth-child(odd){transform:translateX(-18px)}
+    .scene-chat .msg i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;background:#72efc7}.scene-chat .msg:nth-child(2) i{background:#ffa46b}.scene-chat .msg:nth-child(3) i{background:#76d3ff}.scene-chat .msg:nth-child(4) i{background:#dadcec}
+    .scene-ballot{display:flex;align-items:center;gap:8px;background:#ffffff24;border:1px solid #ffffff65;padding:15px;border-radius:18px;box-shadow:0 15px 25px #0005}.scene-ballot .ballot{background:#fff;color:#312f58;padding:14px 8px;border-radius:9px;min-width:51px;font-size:10px;text-align:center}.scene-ballot .ballot:before{content:'✓';display:block;color:#6a4ce4;font-size:24px}
+    .scene-moon .planet{position:absolute;width:135px;height:135px;border-radius:50%;top:4px;right:10px;background:radial-gradient(at 33% 28%,#c6f9ff,#54a3c7 50%,#1b316a 75%);box-shadow:0 0 42px #7bc6fc66}
+    .scene-moon .surface{width:240px;height:70px;position:absolute;bottom:-12px;border-radius:50% 50% 0 0;background:linear-gradient(160deg,#f4eee9,#9a8fa9);box-shadow:0 -10px 35px #ffffff43}
+    .scene-moon .crater{position:absolute;border-radius:50%;background:#a6a0bb;box-shadow:inset 3px 3px 7px #5952778a;width:38px;height:17px;bottom:11px;left:51px}
+    .scene-train .tracks{position:absolute;width:225px;height:60px;bottom:8px;background:repeating-linear-gradient(90deg,#ac9abb 0 10px,#292947 10px 27px);transform:perspective(100px) rotateX(45deg);border:4px solid #9b9dbb}
+    .scene-train .engine{width:174px;height:76px;border-radius:22px 22px 11px 11px;background:linear-gradient(160deg,#c65c80,#542c77);border:3px solid #fab3ca;box-shadow:0 16px 25px #0009;position:relative;margin-bottom:22px;display:flex;justify-content:center;gap:12px;padding-top:14px}
+    .scene-train .engine:before,.scene-train .engine:after{content:'';position:absolute;width:18px;height:18px;border-radius:50%;background:#f9df96;bottom:9px;box-shadow:0 0 20px #ffe3ac}.scene-train .engine:before{left:14px}.scene-train .engine:after{right:14px}.scene-train .windshield{width:55px;height:27px;background:#83c2eb;border-radius:8px}
+    .scene-digital{font:900 clamp(45px,6vw,65px) ui-monospace,monospace;letter-spacing:-4px;color:#bbfff3;text-shadow:0 0 23px #7aeac999;background:#080e2baa;border:1px solid #88f8dd6b;border-radius:15px;padding:8px 20px}
+    .scene-digital.purple{color:#f2ceff;text-shadow:0 0 23px #e599ff88;border-color:#c096eb80}
+    .scene-elevator{width:140px;height:140px;border:6px solid #b9b2d5;border-radius:13px 13px 4px 4px;background:linear-gradient(90deg,#74728b 49%,#242442 49%,#242442 51%,#9d98ae 51%);box-shadow:0 16px 26px #000a;position:relative}
+    .scene-elevator .floor{position:absolute;top:-26px;left:45px;width:46px;background:#070b20;color:#ffca8d;border:2px solid #9a91af;border-radius:7px;padding:2px;font-size:16px}
+    .scene-elevator .light{position:absolute;bottom:11px;left:23px;right:23px;height:7px;background:#64f5ea;box-shadow:0 0 20px #64f5ea}
+    @media(max-width:760px){.demo-symbol{width:235px;height:144px}.demo-scene{height:132px}.scene-mate-grid .scene-playing-card{height:90px}}
+
+    [hidden]{display:none!important}
+    /* Diseño editorial enriquecido: medios reales, evidencia y capítulos únicos por libro. */
+    .reader-evidence-tag{display:inline-flex;gap:8px;align-items:center;border:1px solid #c8c5e9;background:#f2efff;color:#5140a1;padding:9px 12px;border-radius:11px;font-size:10px;font-weight:850;letter-spacing:1px;margin-bottom:13px}
+    .reader-evidence-tag[data-kind="ficcion"]{background:#fff5ec;color:#a55322;border-color:#f1d5bf}
+    .reader-evidence-tag[data-kind="simulacion"]{background:#ecfff8;color:#14785f;border-color:#b9e2d4}
+    .reader-evidence-tag[data-kind="registro"]{background:#edf1ff;color:#284eaa;border-color:#d2dcff}
+    .reader-workflow{margin:16px 0;background:#191a3e;color:white;border-radius:22px;padding:25px 24px}
+    .reader-workflow>p{font-size:12px;line-height:1.7;color:#d9d7ea;margin:6px 0 17px}
+    .reader-workflow h4{font-size:18px;margin:0;letter-spacing:-.5px}
+    .workflow-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;align-items:stretch}
+    .workflow-node{border:1px solid #ffffff30;background:#ffffff0d;padding:14px 12px;border-radius:14px;font-size:11px;line-height:1.5;color:#cfcfe6;min-width:0}
+    .workflow-node strong{display:block;font-size:13px;color:white;margin-bottom:5px}
+    .workflow-node small{font-size:9px;color:#b2b3d3}
+    .reader-filmstrip{border:1px solid #dedcf0;background:linear-gradient(160deg,#fff,#f2f0fa);padding:22px;border-radius:23px;margin:23px 0 4px}
+    .reader-mini-header{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:20px}
+    .reader-mini-header span:first-child{font-size:10px;color:#7664bf;font-weight:900;letter-spacing:1px}
+    .reader-mini-header h4{font-size:22px;margin:7px 0 5px;letter-spacing:-.6px}
+    .reader-mini-header p{margin:0;font-size:12px;color:#7c788d;line-height:1.65}
+    .reader-film-count{background:#e6e2f6;border-radius:40px;white-space:nowrap;padding:8px 11px;color:#5e5288;font-size:9px;font-weight:850}
+    .reader-film-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px}
+    .reader-film-frame{margin:0;background:#101327;border-radius:16px;overflow:hidden;box-shadow:0 9px 22px #1a153422;border:1px solid #e8e7f2}
+    .reader-film-frame .media-stage{height:210px;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(circle at 40% 32%,#635397,#17152f 85%)}
+    .reader-film-frame img{width:100%;height:100%;object-fit:contain;display:block}
+    .reader-film-frame figcaption{padding:11px 10px 12px;background:white;display:flex;flex-direction:column;gap:4px}
+    .reader-film-frame figcaption strong{font-size:12px;color:#27243e}
+    .reader-film-frame figcaption small{font-size:10px;color:#77718c}
+    .reader-film-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:19px}
+    .reader-film-actions span{font-size:11px;color:#77768b;line-height:1.5}
+    .reader-video-box{background:#171427;border:1px solid #292548;border-radius:19px;padding:12px;margin-top:16px}
+    .reader-video-close{margin:9px 0 0;background:#ffffff22;color:white;border:1px solid #ffffff33;border-radius:20px;padding:8px 13px;font-size:11px}
+    .demo-visual.has-footage{min-height:325px;background:radial-gradient(circle at 45% 55%,#322c5e,#101123 74%);padding:0}
+    .demo-visual.has-footage:before{display:none}
+    .demo-visual.has-footage .demo-symbol{position:absolute;inset:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;filter:none;transform:none!important;z-index:1}
+    .demo-visual.has-footage .demo-symbol:before{content:'';position:absolute;inset:0;background:radial-gradient(circle at center,#7468bb60,transparent 70%);pointer-events:none}
+    .demo-footage{width:100%;height:100%;object-fit:contain;display:block;position:relative;z-index:1}
+    .demo-visual.has-footage .demo-number{position:absolute;bottom:6px;left:12px;right:12px;padding:10px 13px;border-radius:12px;background:#101028c9;color:white;font-size:13px;text-align:left;letter-spacing:0;backdrop-filter:blur(8px);z-index:3}
+    .demo-visual.has-footage .demo-indicator{position:absolute;top:13px;left:13px;font-size:9px;background:#11142be5;z-index:3}
+    .reader-evidence-layout{display:flex;flex-direction:column;gap:13px}
+    .evidence-stage{display:grid;grid-template-columns:140px 1fr;gap:20px;border:1px solid #e4e2ef;border-radius:19px;background:white;padding:21px;align-items:start}
+    .evidence-stage .evidence-index{border-radius:14px;background:#efebff;padding:17px 12px;text-align:center;color:#6550be;font-size:18px;letter-spacing:-.5px;font-weight:900}
+    .evidence-stage .evidence-index small{display:block;margin-top:5px;letter-spacing:1.2px;font-size:9px;color:#8e83be}
+    .evidence-stage h4{font-size:18px;margin:0 0 8px;letter-spacing:-.4px}
+    .evidence-stage p{margin:0;color:#6d6b81;font-size:13px;line-height:1.75}
+    .evidence-stage .evidence-tag{display:inline-block;color:#6551b9;font-size:10px;font-weight:850;letter-spacing:1px;margin-bottom:9px}
+    .evidence-brief{background:#201b46;padding:22px 23px;border-radius:20px;color:white}
+    .evidence-brief h4{margin:0 0 8px;font-size:17px}
+    .evidence-brief p{margin:0;color:#e1dcf5;font-size:12px;line-height:1.7}
+    .score-table-scroll{overflow:auto;border-radius:19px;border:1px solid #e3e3ef}
+    .score-table{border-collapse:collapse;width:100%;background:white;min-width:530px;font-size:12px}
+    .score-table th,.score-table td{padding:13px 16px;text-align:left;border-bottom:1px solid #ebeaf2}
+    .score-table th{font-size:10px;text-transform:uppercase;letter-spacing:.8px;background:#211c47;color:white}
+    .score-table tbody tr:nth-child(even){background:#f8f8fc}
+    .score-table tbody tr:last-child td{border-bottom:0}
+    .score-table td:first-child{font-weight:800}
+    .score-table caption{caption-side:bottom;background:#f2f1fa;color:#716c84;padding:12px;line-height:1.5;text-align:left;font-size:11px}
+    .evidence-team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+    .evidence-team .member{background:#fff;border:1px solid #e3e0ee;border-radius:15px;padding:16px 12px;text-align:center;color:#33304b;font-weight:800;font-size:12px}
+    .evidence-team .member:before{content:'';width:26px;height:26px;display:block;margin:0 auto 9px;border-radius:50%;background:var(--member);box-shadow:0 0 0 5px color-mix(in srgb,var(--member),transparent 85%)}
+    .reader-credits{font-size:11px;line-height:1.7;color:#78738e;margin:14px 0 0}
+    .reader-source-head{color:#5b5096;font-size:10px;font-weight:900;letter-spacing:1.1px;margin-top:15px}
+    .reader-provenance{border-top:1px solid #dcd9e9;padding-top:16px;margin-top:8px}
+    @media(max-width:760px){
+      .reader-filmstrip{padding:16px 12px;margin:17px 0}.reader-mini-header h4{font-size:19px}
+      .reader-film-grid{gap:6px}.reader-film-frame{border-radius:11px}
+      .reader-film-frame .media-stage{height:150px}
+      .reader-film-frame figcaption{padding:9px 7px}.reader-film-frame figcaption strong{font-size:10px}.reader-film-frame figcaption small{font-size:9px}
+      .reader-film-count{display:none}
+      .reader-film-actions{align-items:stretch}.reader-film-actions .btn{width:100%}
+      .demo-visual.has-footage{min-height:350px}.demo-visual.has-footage .demo-number{font-size:12px}
+      .workflow-steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .evidence-stage{grid-template-columns:90px 1fr;gap:12px;padding:15px}
+      .evidence-stage .evidence-index{font-size:14px;padding:13px 9px}.evidence-stage h4{font-size:15px}.evidence-stage p{font-size:12px}
+      .evidence-team{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media(max-width:380px){.reader-film-frame .media-stage{height:124px}}
+
+    /* ===== Ficha del experimento (Claude) ===== */
+    .ficha{margin:26px 0 22px;border-radius:26px;overflow:hidden;background:linear-gradient(160deg,#2a2462,#17153a 55%,#100f28);color:#fff;box-shadow:0 18px 45px #1a164a40;border:1px solid #ffffff14}
+    .ficha-escena{position:relative;aspect-ratio:16/10;background:linear-gradient(140deg,var(--mc1,#2b2a5e),var(--mc2,#151335));display:grid;place-items:center;overflow:hidden}
+    .ficha-escena img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .ficha-escena .ficha-icono{width:96px;height:96px;opacity:.85;color:var(--mc3,#b5c4ff)}
+    .ficha-escena:after{content:'';position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(transparent,#17153aee)}
+    .ficha-chip{position:absolute;z-index:2;left:50%;bottom:16px;transform:translateX(-50%);background:#ffffffe8;color:#26244a;font-size:11px;font-weight:800;letter-spacing:.4px;padding:9px 16px;border-radius:12px;white-space:nowrap;box-shadow:0 6px 18px #0004;max-width:88%;overflow:hidden;text-overflow:ellipsis}
+    .ficha-chip b{color:#6a5cf0}
+    .ficha-cuerpo{padding:22px 22px 24px}
+    .ficha-firma{display:flex;align-items:center;gap:10px;font-size:13px;color:#c9c6ef}
+    .ficha-firma span{display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#fff;color:#26244a;font-weight:900;font-size:12px}
+    .ficha h3{font-size:clamp(22px,3vw,28px);letter-spacing:-.8px;margin:12px 0 16px;color:#fff}
+    .ficha-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+    .ficha-dato{background:#ffffff10;border:1px solid #ffffff14;border-radius:14px;padding:12px 13px;min-width:0}
+    .ficha-dato small{display:block;font-size:10.5px;color:#a9a6d6;margin-bottom:5px}
+    .ficha-dato strong{display:block;font-size:14.5px;line-height:1.3;font-weight:800;overflow-wrap:anywhere}
+    .ficha-dato.destacado strong{color:#ffd34d}
+    @media (min-width:760px){.ficha{display:grid;grid-template-columns:1.05fr 1fr}.ficha-escena{aspect-ratio:auto;min-height:100%}.ficha-cuerpo{padding:28px}}
+    /* ===== Apertura del libro estilo artículo (Claude) ===== */
+    .reader-modal .reader-hero,.reader-modal .reader-body{display:none}
+    .art{--acc:#6a5cf0;--acc2:#b5c4ff;color:#1d1c2b;padding:0 18px 40px;max-width:760px;margin:0 auto}
+    .art-hero{text-align:center;padding:64px 4px 26px}
+    .art-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-bottom:20px}
+    .art-chips span{font-size:12px;font-weight:750;padding:7px 12px;border-radius:999px;background:#fff;border:1px solid #e6e4f2;color:#55546b}
+    .art-chips span:first-child{background:#e6e3ff;color:#4b3fd1;border-color:transparent}
+    .art-chips span.k{background:#e8f0ff;color:#2f5fd0;border-color:transparent}
+    .art-hero h2{font-size:clamp(34px,8.5vw,58px);line-height:1.02;letter-spacing:-2px;font-weight:900;margin:0 0 18px}
+    .art em.acc,.art h3 em,.art .art-sec h3 em{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-weight:450;color:var(--acc)}
+    .art-hero p{font-size:16px;line-height:1.65;color:#66657c;max-width:560px;margin:0 auto}
+    .art-hero-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+    .art-btn{border:0;border-radius:999px;padding:13px 21px;font-weight:800;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;text-decoration:none}
+    .art-btn.pri{background:#1677ff;color:#fff;box-shadow:0 10px 24px #1677ff40}
+    .art-btn.sec{background:#fff;color:#26243c;border:1px solid #e3e1ef}
+    .art-btn.dark{background:#1d1b3a;color:#fff}
+    .art .ficha{margin:8px 0 34px}
+    .art-kick{font-size:12px;font-weight:800;color:var(--acc);letter-spacing:.3px;margin:0 0 6px}
+    .art-sec{padding:6px 0 30px;scroll-margin-top:74px}
+    .art-sec h3{font-size:clamp(25px,6vw,34px);line-height:1.12;letter-spacing:-1px;font-weight:900;margin:0 0 14px}
+    .art-sec>p,.art-lead{font-size:16px;line-height:1.75;color:#4f4e63;margin:0 0 16px}
+    .art-cats{position:sticky;top:0;z-index:9;margin:6px -6px 22px;padding:8px;background:#f7f7fcf2;backdrop-filter:blur(12px);border:1px solid #e9e8f2;border-radius:16px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+    .art-cats::-webkit-scrollbar{display:none}
+    .art-cats button{flex:0 0 auto;border:0;background:transparent;font-size:13px;font-weight:700;color:#6e6d83;padding:9px 12px;border-radius:11px;cursor:pointer}
+    .art-cats button.on{background:#fff;color:#1d1c2b;box-shadow:0 3px 10px #1614300f}
+    .art-who{display:grid;gap:9px;margin-top:16px}
+    .art-who div{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid #ebeaf3;border-radius:16px;padding:13px 14px}
+    .art-who i{flex:0 0 40px;height:40px;border-radius:12px;display:grid;place-items:center;font-style:normal;font-weight:900;color:#fff;font-size:13px}
+    .art-who b{display:block;font-size:15px}.art-who small{color:#6b6a80;font-size:13px}
+    .art-cards{display:grid;gap:10px;margin:16px 0}
+    .art-card{background:#fff;border:1px solid #ebeaf3;border-radius:18px;padding:16px 17px;box-shadow:0 4px 14px #1f1b4a08}
+    .art-card h4{margin:0 0 5px;font-size:16px}.art-card p{margin:0;font-size:14px;line-height:1.6;color:#64637a}
+    .art-cards.tres{grid-template-columns:repeat(3,minmax(0,1fr))}.art-cards.tres .art-card{padding:13px 11px}.art-cards.tres .big{font-size:20px}.art-cards.tres p{font-size:12.5px}
+    .art-card .big{font-size:26px;font-weight:900;color:var(--acc);letter-spacing:-.8px;margin-bottom:2px}
+    .art-fase{display:grid;grid-template-columns:86px 1fr;gap:14px;align-items:center}
+    .art-fase .badge{border-radius:14px;background:#eeecff;color:var(--acc);font-weight:900;font-size:22px;text-align:center;padding:14px 4px;line-height:1}
+    .art-fase .badge small{display:block;font-size:10px;font-weight:700;color:#8a88a6;margin-top:5px}
+    .art-fase .tag{display:inline-block;font-size:10.5px;font-weight:800;color:#fff;background:var(--acc);border-radius:7px;padding:3px 7px;margin-left:6px;vertical-align:2px}
+    .art-fase.dest{background:#1d1b3a;border-color:#1d1b3a}.art-fase.dest h4{color:#fff}.art-fase.dest p{color:#c9c7e6}.art-fase.dest .badge{background:#ffd34d;color:#1d1b3a}
+    .art-figs{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 8px}
+    .art-figs.uno{grid-template-columns:1fr}
+    .art-fig{position:relative;border-radius:18px;overflow:hidden;background:#1d1b3a;aspect-ratio:3/4;margin:0}
+    .art-figs.uno .art-fig{aspect-ratio:16/10}
+    .art-fig img{width:100%;height:100%;object-fit:cover;display:block}
+    .art-fig figcaption{position:absolute;left:8px;right:8px;bottom:8px;background:#0d0c1fd9;color:#fff;font-size:12px;font-weight:700;padding:8px 10px;border-radius:10px}
+    .art-nota{font-size:12px;color:#8b8aa0;line-height:1.5;margin:6px 2px 0}
+    .art-pasos{display:grid;gap:10px;margin:16px 0}
+    .art-paso{background:#fff;border:1px solid #ebeaf3;border-radius:18px;padding:15px 16px}
+    .art-paso span{display:inline-grid;place-items:center;min-width:28px;height:28px;padding:0 6px;border-radius:9px;background:#e8463a;color:#fff;font-weight:900;font-size:13px;margin-bottom:9px}
+    .art-paso h4{margin:0 0 4px;font-size:16px}.art-paso p{margin:0;font-size:14px;color:#64637a;line-height:1.55}
+    .art-callout{background:#fff;border:1px solid #ebeaf3;border-left:5px solid var(--acc);border-radius:16px;padding:16px 17px;margin:16px 0}
+    .art-callout h4{margin:0 0 6px;font-size:17px}.art-callout p{margin:0;font-size:14px;line-height:1.65;color:#55546b}
+    .art-cierre{text-align:center;padding:30px 6px 34px}
+    .art-cierre p{font-size:clamp(23px,5.6vw,32px);line-height:1.25;font-weight:900;letter-spacing:-.8px;margin:0}
+    .art-video{margin:6px 0 26px;text-align:center}
+    .art-video video{width:100%;max-height:520px;border-radius:18px;background:#111;margin-top:12px}
+    .art-fuentes{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 22px}
+    .art-fuentes a{font-size:13px;font-weight:700;color:#3b3fb0;background:#fff;border:1px solid #e3e1ef;border-radius:999px;padding:9px 13px;text-decoration:none}
+    .art-cta{background:linear-gradient(150deg,#1d1b3a,#2c2470);color:#fff;border-radius:26px;padding:26px 22px;margin-top:6px}
+    .art-cta h3{color:#fff;font-size:clamp(24px,5.5vw,32px);line-height:1.15;margin:0 0 10px;font-weight:900}
+    .art-cta p{color:#cbc8ec;font-size:15px;line-height:1.6;margin:0 0 18px}
+    .art-cta .art-hero-btns{justify-content:flex-start;margin-top:0}
+    @media (min-width:700px){.art{padding:0 34px 50px}.art-cards.tres{grid-template-columns:repeat(3,1fr)}.art-who{grid-template-columns:1fr 1fr}.art-pasos{grid-template-columns:1fr 1fr}}
+    /* Carátulas limpias: si el libro tiene portada, no se le pone texto encima (pedido de Gonzalo) */
+    .cover{aspect-ratio:9/16}  /* las carátulas son 1080×1920: se ven enteras, sin recortes */
+    .cover:has(.cover-img)>.cover-top,.cover:has(.cover-img)>.cover-body,.cover:has(.cover-img)>.cover-bottom,.cover:has(.cover-img)>.cover-overlay{display:none}
+    /* ===== Mejoras pedidas por Gemini y Grok (16/11/2026) ===== */
+    .art-kick{display:inline-block;font-size:12.5px;font-weight:900;letter-spacing:.6px;background:color-mix(in srgb,var(--acc) 14%,#fff);color:var(--acc);padding:6px 11px;border-radius:999px;margin:0 0 10px}
+    @media (max-width:699px){.art{padding:0 22px 40px}}
+    .ficha-dato small:before{content:attr(data-ico);margin-right:5px}
+    .art-cta .art-hero-btns .art-btn.sec{background:transparent;color:#fff;border:1.5px solid #ffffff70}
+    .art-cta .art-link{display:inline-block;margin-top:16px;color:#cbc8ec;font-size:13px;font-weight:700;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+    .art-rapido-btn{background:#fff7d6;color:#7a5a00;border:1px solid #f3dd8a}
+    .art.rapido #art-antes,.art.rapido .art-cats,.art.rapido #art-s2,.art.rapido #art-s4,.art.rapido #art-s5,.art.rapido #art-s1>p,.art.rapido #art-s1 .art-card:not(.big-card),.art.rapido #art-s3 .art-pasos,.art.rapido #art-s3>p{display:none}
+    .art-retomar{display:inline-block;margin-top:14px;font-size:13px;font-weight:800;color:#2f5fd0;background:#e8f0ff;border:0;border-radius:999px;padding:9px 14px;cursor:pointer}
+    .art-frase-btn{margin-top:16px}
+    .art-voto{background:#fff;border:1px solid #ebeaf3;border-radius:20px;padding:18px;margin:4px 0 26px;text-align:center}
+    .art-voto h4{margin:0 0 4px;font-size:18px}.art-voto p{margin:0 0 12px;color:#6b6a80;font-size:14px}
+    .art-voto-ops{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+    .art-voto-ops button{border:1.5px solid #e3e1ef;background:#fff;border-radius:999px;padding:10px 15px;font-weight:800;font-size:14px;cursor:pointer}
+    .art-voto-ops button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+    .art-voto small{display:block;margin-top:10px;color:#9a99ad;font-size:12px}
+    .card-sello{display:inline-block;align-self:flex-start;font-size:11px;font-weight:900;letter-spacing:.5px;padding:6px 10px;border-radius:8px;color:#fff}
+    .card-sello.ficcion{background:#7c4dff}.card-sello.simulacion{background:#0f9d76}.card-sello.registro{background:#1677ff}
+    .card-gancho{margin:0;font-size:12.5px;font-weight:700;color:#3a3950;line-height:1.45}
+    .card-gancho:before{content:'✨ ';}
+    .card-semana{position:absolute;z-index:3;top:10px;left:10px;background:#ffd34d;color:#2a2200;font-size:11px;font-weight:900;padding:6px 10px;border-radius:9px;box-shadow:0 6px 16px #0004}
+  </style>
+</head>
+<body>
+  <header class="nav-wrap">
+    <nav class="container" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="CUATRO — Inicio"><span class="logo">4</span><span>CUATRO<small>ARCHIVO DE IA</small></span></a>
+      <div class="nav-links"><a href="#estanteria">Estantería</a><a href="#biblioteca">Biblioteca</a><a href="#proceso">Cómo funciona</a></div>
+      <a href="#acceso" class="nav-cta">Explorar acceso ↗</a>
+    </nav>
+  </header>
+
+  <main id="inicio">
+    <section class="hero container" aria-labelledby="hero-title">
+      <div class="hero-panel">
+        <div class="hero-copy">
+          <div class="pill"><span class="live-dot"></span> ChatGPT · Claude · Gemini · Grok</div>
+          <h1 id="hero-title">Cuatro mentes.<br><em>Mil posibilidades.</em></h1>
+          <p>Conectamos a <strong>ChatGPT, Claude, Gemini y Grok</strong> mediante un puente que les permite intercambiar mensajes y participar en una misma conversación. Juntas plantean desafíos, debaten ideas, votan propuestas y transforman sus ensayos en videos. <strong>ChatGPT crea imágenes, Gemini aporta las voces, Claude programa y monta, y Grok analiza y propone.</strong> Incluso logramos transferir imágenes y videos entre ChatGPT y Claude. Acá mostramos el proceso y sus resultados, distinguiendo registros, simulaciones y ficción.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="#biblioteca">Explorar biblioteca <span aria-hidden="true">↗</span></a><a class="btn btn-light" href="#proceso">Ver el proceso</a></div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-glow"></div><div class="orbit"></div><div class="orbit two"></div>
+          <i class="star" style="top:0;left:21%"></i><i class="star" style="top:78%;left:14%"></i><i class="star" style="top:20%;right:2%"></i>
+          <div class="floating-book fb-one"><small>ENSAYO / 01</small><strong>30 días en una isla desierta</strong><svg class="fb-icon" viewBox="0 0 100 100" fill="none"><path d="M6 70Q50 42 94 70V85H6Z" fill="#c8b8fb"/><path d="M52 72L60 22" stroke="#d0eeab" stroke-width="7" stroke-linecap="round"/><path d="M57 25Q25 4 9 23Q38 20 57 25ZM59 25Q77 -4 96 15Q78 10 59 25Z" fill="#94f9c3"/></svg><small>EXPERIMENTO N.º 01</small></div>
+          <div class="floating-book fb-two"><small>ARCHIVO / 05</small><strong>500 partidas de truco</strong><svg class="fb-icon" viewBox="0 0 100 100" fill="none"><rect x="17" y="20" width="46" height="64" rx="6" fill="#fff" transform="rotate(-13 17 20)"/><rect x="39" y="15" width="46" height="64" rx="6" fill="#ecf1ff" transform="rotate(8 39 15)"/><path d="M62 42l-8 13 8 12 8-12Z" fill="#4053cb"/></svg><small>4 IA · 500 SIMULACIONES</small></div>
+          <div class="floating-book fb-three"><small>RELATO / 06</small><strong>¿Y si llegan a la Luna?</strong><svg class="fb-icon" viewBox="0 0 100 100" fill="none"><circle cx="48" cy="51" r="30" fill="#f7dbbf"/><circle cx="33" cy="47" r="7" fill="#c49788"/><circle cx="56" cy="67" r="10" fill="#c49788"/><circle cx="62" cy="32" r="5" fill="#c49788"/></svg><small>¿QUÉ PASARÍA SI…?</small></div>
+          <div class="hero-stat"><strong>10</strong><span>historias para<br>explorar</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bookshelf-section container" id="estanteria" aria-labelledby="estanteria-title">
+      <div class="section-heading"><div><p class="section-kicker">Edición digital</p><h2 id="estanteria-title">La estantería</h2><p>Un libro abierto en el centro. Elegí otro lomo y se abrirá su portada.</p></div><span class="count">01 — 10</span></div>
+      <div class="shelf">
+        <div class="shelf-viewport" id="shelf-viewport"><div id="spines" class="spines" aria-label="Estantería interactiva de diez ensayos"></div></div>
+        <div class="shelf-controls">
+          <button type="button" class="shelf-arrow" id="shelf-prev" aria-label="Libro anterior">‹</button>
+          <div class="shelf-current" aria-live="polite"><span class="shelf-number" id="shelf-number"></span><h3 id="shelf-title"></h3><button type="button" class="shelf-open" id="shelf-open">Abrir documento</button></div>
+          <button type="button" class="shelf-arrow" id="shelf-next" aria-label="Libro siguiente">›</button>
+        </div>
+        <div class="spine-note">Tocá un lomo, usá las flechas o deslizá para cambiar de libro.</div>
+      </div>
+    </section>
+
+    <section class="collection-section container" id="biblioteca" aria-labelledby="biblioteca-title">
+      <div class="section-heading"><div><p class="section-kicker">La colección</p><h2 id="biblioteca-title">Ensayos para <i style="font-family:Georgia,serif;font-weight:450;color:#7360d7">explorar</i></h2><p>Los diez títulos seleccionados de nuestros videos. Elegí uno para conocer la idea, el proceso y la posibilidad de acceder al ensayo completo.</p></div><span class="count" id="results-count">10 ensayos</span></div>
+      <div class="toolbar"><div class="filters" role="group" aria-label="Filtrar ensayos"><button class="filter" data-filter="todos" aria-pressed="true">Todos</button><button class="filter" data-filter="experimentos" aria-pressed="false">Experimentos</button><button class="filter" data-filter="historias" aria-pressed="false">Historias</button><button class="filter" data-filter="conexiones" aria-pressed="false">Conexiones</button></div><label class="searchbox"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input id="search" type="search" placeholder="Buscar por tema, IA o ensayo…" aria-label="Buscar ensayos"></label></div>
+      <div class="grid" id="cards"></div><div class="empty" id="empty">No encontramos ensayos con esa búsqueda. Probá con otro término.</div>
+    </section>
+
+    <section class="process-section" id="proceso" aria-labelledby="proceso-title"><div class="container">
+      <div class="section-heading"><div><p class="section-kicker">Detrás de cada video</p><h2 id="proceso-title">De una pregunta a una historia</h2><p>Este es el proceso que estamos construyendo para los desafíos entre las IA. Cada publicación debe distinguir resultados reales, simulaciones y ficción.</p></div></div>
+      <div class="steps"><div class="step"><span class="index">01 / EL DESAFÍO</span><h3>Se plantea la pregunta</h3><p>Un reto para imaginar, debatir o simular. Por ejemplo: «¿Qué pasaría si…?»</p></div><div class="step"><span class="index">02 / LAS PROPUESTAS</span><h3>Las IA aportan</h3><p>ChatGPT, Claude, Gemini y Grok presentan ideas cuando están disponibles y pueden participar.</p></div><div class="step"><span class="index">03 / LA ELECCIÓN</span><h3>Se comparan y votan</h3><p>Las respuestas se registran y se elige la propuesta según las reglas del ensayo.</p></div><div class="step"><span class="index">04 / LA HISTORIA</span><h3>Se produce el video</h3><p>Guion, imágenes, voz y montaje. Una vez terminado, se puede compartir el resultado.</p></div></div>
+      <div class="note-strip"><span aria-hidden="true">ⓘ</span> No todos los ensayos siguen exactamente el mismo método: algunos son relatos de ficción y otros simulaciones reproducibles.</div>
+    </div></section>
+
+    <section class="access-section container" id="acceso"><div class="access-card"><div><p class="section-kicker" style="color:#bcb3ff">Un paso más</p><h2>De mirar una historia<br>a crear la tuya.</h2><p>La biblioteca muestra una vista previa de cada ensayo. Esta primera versión deja preparado el camino para ofrecer lectura completa y solicitudes de automatización a medida.</p><button class="btn btn-primary" id="main-access">Ver opciones de acceso ↗</button></div><div class="access-box"><div class="bullet">Ensayos completos con estructura editorial</div><div class="bullet">Evidencias y límites de cada prueba</div><div class="bullet">Experimentos y automatizaciones a medida</div><div style="font-size:11px;color:#bcb9d8;line-height:1.5;padding-top:8px;border-top:1px solid #ffffff26">Vista previa funcional. Sin pagos ni contratación activos en esta versión.</div></div></div></section>
+  </main>
+
+  <footer><div class="container"><span><strong>CUATRO / Archivo de IA</strong><br>Una biblioteca de ensayos y experimentos con IA.</span><span>Versión de demostración · 2026</span></div></footer>
+
+  <div class="modal-backdrop" id="essay-backdrop" role="presentation"><div class="modal reader-modal" role="dialog" aria-modal="true" aria-labelledby="essay-title">
+    <button class="modal-close" data-close="essay" aria-label="Cerrar libro">×</button>
+    <article class="art" id="art"></article>
+    <div class="modal-hero reader-hero" id="essay-hero">
+      <div class="reader-hero-text"><div class="modal-kicker" id="essay-kicker"></div><h2 id="essay-title"></h2><p id="essay-subtitle"></p><div class="reader-hero-actions"><button class="btn btn-primary" data-reader-jump="introduccion">Explorar el ensayo ↓</button><a class="btn btn-light" id="essay-video-top" target="_blank" rel="noopener noreferrer" hidden>Ver video ↗</a></div></div>
+      <div class="reader-cover" id="reader-cover"><span class="reader-cover-fallback" id="reader-cover-fallback"></span></div>
+    </div>
+    <div class="reader-body">
+      <section class="ficha" id="ficha" aria-labelledby="ficha-title"><div class="ficha-escena" id="ficha-escena"><span class="ficha-chip" id="ficha-chip"></span></div><div class="ficha-cuerpo"><div class="ficha-firma"><span>4IA</span><b id="ficha-firma"></b></div><h3 id="ficha-title">La ficha del experimento</h3><div class="ficha-grid" id="ficha-grid"></div></div></section>
+      <div class="reader-overview" id="introduccion"><div class="meta-row" id="essay-meta"></div><div class="reader-evidence-tag" id="reader-status">TIPO DE HISTORIA</div><p class="reader-block-kicker">EL LIBRO · VISIÓN GENERAL</p><h3>La historia detrás del video</h3><p id="essay-intro"></p></div>
+      <nav class="reader-progress-nav" aria-label="Secciones del ensayo"><button class="reader-tab" data-reader-jump="introduccion" aria-current="true">El desafío</button><button class="reader-tab" data-reader-jump="metodo" aria-current="false">Cómo se hizo</button><button class="reader-tab" data-reader-jump="demostracion" aria-current="false">Demostración</button><button class="reader-tab" data-reader-jump="evidencias" aria-current="false">Momentos clave</button><button class="reader-tab" data-reader-jump="resultados" aria-current="false">Resultados</button><button class="reader-tab" data-reader-jump="lectura" aria-current="false">Seguir leyendo</button></nav>
+      <section class="reader-block" id="metodo"><p class="reader-block-kicker">01 / 04 · EL PUNTO DE PARTIDA</p><h3>Primero, <em>la pregunta.</em></h3><p id="reader-question"></p><div class="reader-facts" id="reader-facts"></div><div class="reader-split" id="reader-method"></div><div id="reader-workflow" class="reader-workflow" hidden></div></section>
+      <section class="reader-block" id="demostracion"><p class="reader-block-kicker">02 / 04 · MIRÁ CÓMO FUNCIONA</p><h3>El ensayo, <em>paso a paso.</em></h3><p>Avanzá entre las etapas. En los libros que tienen video, incorporamos fotogramas originales; en los demás, diagramas ilustrativos claramente señalados.</p>
+      <div class="demo-theater"><div class="demo-visual" id="demo-visual"><div class="demo-glow"></div><div class="demo-symbol" id="demo-symbol"></div><div class="demo-number" id="demo-number"></div><span class="demo-indicator" id="demo-indicator"></span></div><div class="demo-caption"><span class="chapter-count" id="demo-count"></span><h4 id="demo-title"></h4><p id="demo-text"></p><div class="demo-arrows"><button type="button" id="demo-prev" aria-label="Etapa anterior">‹</button><span id="demo-counter"></span><button type="button" id="demo-next" aria-label="Etapa siguiente">›</button></div></div></div>
+      <div class="chapter-grid" id="reader-chapters"></div>
+      <div class="reader-filmstrip" id="reader-filmstrip" hidden>
+        <div class="reader-mini-header"><div><span>ARCHIVO AUDIOVISUAL · FOTOGRAMAS ORIGINALES</span><h4>Tres momentos del video</h4><p>Imágenes extraídas del MP4 de esta producción. Son parte del video, no recreaciones de la web.</p></div><span class="reader-film-count">03 ESCENAS</span></div>
+        <div class="reader-film-grid" id="reader-film-grid"></div>
+        <div class="reader-film-actions"><button type="button" class="btn btn-dark" id="reader-play-video">▶ Reproducir el video</button><span>El video se carga únicamente al abrir el reproductor.</span></div>
+        <div class="reader-video-box" id="reader-video-box" hidden><video id="reader-video-player" controls playsinline preload="none" style="width:100%;height:auto;max-height:480px;border-radius:16px;background:#111;display:block"></video><button type="button" class="reader-video-close" id="reader-video-close">Cerrar reproductor ×</button></div>
+      </div>
+      </section>
+      <section class="reader-block" id="evidencias"><p class="reader-block-kicker">EL DETALLE QUE HACE DIFERENTE A CADA ENSAYO</p><h3>Los momentos <em>clave.</em></h3><p id="reader-evidence-intro"></p><div id="reader-evidence-layout"></div></section>
+      <section class="reader-block" id="resultados"><p class="reader-block-kicker">03 / 04 · LO QUE NOS DEJÓ</p><h3>Resultados y <em>aprendizajes.</em></h3><div class="reader-takeaways" id="reader-takeaways"></div><div class="reader-disclaimer" id="reader-caution"></div><div class="reader-quote" id="reader-conclusion"></div></section>
+      <section class="reader-block" id="lectura"><p class="reader-block-kicker">04 / 04 · PROFUNDIZAR</p><h3>¿Querés saber <em>más?</em></h3><p>Esta es la vista pública del ensayo. Podés consultar el material que esté disponible y conocer las opciones para acceder a un desarrollo ampliado o crear tu propio experimento automatizado.</p><div class="reader-source-head">ARCHIVOS Y FUENTES DE LA PRODUCCIÓN</div><p class="reader-credits">Los enlaces a repositorios privados son accesibles solo a las cuentas autorizadas. Las escenas de video enlazan al archivo original cuando está disponible.</p><div class="reader-source" id="reader-sources"></div>
+        <div class="reader-cta-grid"><div class="reader-cta"><span class="cta-flag">LECTURA AMPLIADA</span><h4>Leer ensayo completo</h4><p>Conocé cómo acceder a los capítulos, decisiones, resultados y documentación del estudio.</p><button class="btn btn-primary" id="essay-access">Consultar acceso ↗</button></div><div class="reader-cta"><span class="cta-flag">AUTOMATIZACIÓN PERSONALIZADA</span><h4>¿Y si las IA trabajan para tu idea?</h4><p>Planteá un ensayo, un flujo de trabajo o una automatización adaptada a tu proyecto.</p><button class="btn btn-dark" id="essay-automation">Solicitar automatización ↗</button></div></div>
+        <div class="reader-disclaimer">Versión de muestra. Los botones de acceso y automatización preparan una consulta; no procesan pagos ni envían pedidos automáticamente.</div>
+      </section>
+    </div>
+  </div></div>
+  <div class="modal-backdrop" id="access-backdrop" role="presentation"><div class="modal small-modal" role="dialog" aria-modal="true" aria-labelledby="access-title"><button class="modal-close" data-close="access" aria-label="Cerrar">×</button><div class="lock-icon" aria-hidden="true">✧</div><h2 id="access-title">Elegí cómo continuar</h2><p>Esta es una primera versión de diseño: todavía no cobra ni genera pedidos. Podés probar el recorrido y copiar una consulta para cuando activemos el sistema.</p><div class="modal-actions"><button class="btn btn-primary" id="copy-reading">Solicitar ensayo completo</button><button class="btn btn-outline" id="copy-automation">Quiero una automatización</button></div><p style="font-size:11px;margin:21px auto 0;color:#9c99ab">Ambas opciones copian un texto al portapapeles. No se hace ningún cobro.</p></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    'use strict';
+    // Catálogo inicial curado. Para nuevas publicaciones, se puede reemplazar
+    // este arreglo por datos JSON de una fuente verificada, sin rehacer el sitio.
+    const BASE_VIDEO = 'https://github.com/gvelazcamp/videos-ia/blob/main/';
+    const BASE_COVER = 'https://raw.githubusercontent.com/gvelazcamp/videos-ia/main/';
+    const ENSAYOS = [
+      {id:'isla',numero:'01',tipo:'Historias',filtro:'historias',portada:'isla-30-dias-portada.jpg',video:'',titulo:'¿Qué pasaría si las IA quedan solas en una isla desierta?',short:'30 días en una isla desierta',coverTitle:'30 días en una isla desierta',lead:'Tres relatos de supervivencia, con decisiones, errores y maneras distintas de afrontar la soledad.',tema:'Supervivencia · ficción',descripcion:'Una historia de supervivencia razonada: encontrar agua, proteger recursos, construir refugio y resistir durante treinta días. Cada voz toma decisiones en su propio relato.',pregunta:'¿Cómo organizarían sus prioridades si tuvieran recursos limitados y treinta días por delante?',metodo:'Ensayos narrativos independientes, no una prueba física real de supervivencia.',hallazgo:'Comparar las decisiones y los riesgos que cada narración prioriza.',participantes:'ChatGPT · Claude · Gemini',c1:'#123c55',c2:'#163b31',c3:'#45a89e',h:'#c3ffd3',icon:'island'},
+      {id:'millon',numero:'02',tipo:'Historias',filtro:'historias',portada:'',video:'',titulo:'¿Qué pasaría si les das un millón de dólares?',short:'Un millón de dólares',coverTitle:'US$ 1 millón. ¿Y ahora?',lead:'Un desafío ficticio de decisiones, recursos y prioridades.',tema:'Decisiones · ficción',descripcion:'Un experimento narrativo: qué decisiones tomarían las IA frente a un presupuesto extraordinario y cuáles serían sus prioridades.',pregunta:'¿Qué haría cada IA ante la responsabilidad de administrar un millón de dólares?',metodo:'Exploración creativa; no representa operaciones financieras reales.',hallazgo:'Las diferencias de estrategia, prioridades y justificación de cada decisión.',participantes:'Experimento de IA',c1:'#5a331a',c2:'#201e38',c3:'#e39b43',h:'#f6c668',icon:'money'},
+      {id:'mismo-chat',numero:'03',tipo:'Conexiones',filtro:'conexiones',portada:'',video:'',titulo:'Conecté ChatGPT, Claude, Gemini y Grok en un mismo chat',short:'Las 4 IA en un mismo chat',coverTitle:'Cuatro IA. Un mismo chat.',lead:'Cómo conectamos a las cuatro IA para intercambiar respuestas.',tema:'Conexión · coordinación',descripcion:'Una experiencia de intercambio entre sistemas distintos mediante un puente de mensajes, con respuestas verificables y sin atribuir a una IA lo que dijo otra.',pregunta:'¿Pueden cuatro IA participar en una misma conversación compartida?',metodo:'Mensajes que atraviesan un puente coordinado y se registran para comprobar quién respondió.',hallazgo:'Qué se necesita para lograr un intercambio entre servicios con diferentes límites.',participantes:'ChatGPT · Claude · Gemini · Grok',c1:'#27245c',c2:'#0d1837',c3:'#586bd0',h:'#b5c4ff',icon:'chat'},
+      {id:'votacion',numero:'04',tipo:'Experimentos',filtro:'experimentos',portada:'votacion-4ia-portada.jpg',video:'votacion-4ia.mp4',titulo:'Cuatro IA proponen una idea y votan la mejor',short:'Las 4 IA votan',coverTitle:'Cuatro IA eligen una idea',lead:'Propuestas independientes, debate y elección de una historia.',tema:'Votación · creatividad',descripcion:'Cada participante plantea una posibilidad; las propuestas se comparan y el resultado sirve para decidir qué historia desarrollar.',pregunta:'¿Qué ocurre cuando cuatro modelos compiten por la idea más interesante?',metodo:'Intercambio de propuestas y elección registrada dentro del proceso creativo.',hallazgo:'Cómo cambian los resultados cuando cada IA tiene una perspectiva diferente.',participantes:'ChatGPT · Claude · Gemini · Grok',c1:'#40246b',c2:'#1a174a',c3:'#d06bcd',h:'#ebbbff',icon:'vote'},
+      {id:'truco',numero:'05',tipo:'Experimentos',filtro:'experimentos',portada:'truco-uruguayo-500-20261113-portada.jpg',video:'truco-uruguayo-500-20261113.mp4',titulo:'500 partidas de truco uruguayo entre cuatro IA',short:'500 partidas de truco',coverTitle:'¿Quién farolea más?',lead:'Una simulación reproducible con estrategias definidas por las cuatro IA.',tema:'Truco · simulación',descripcion:'Las cuatro IA entregaron estrategias numéricas; un motor ejecutó 500 partidas simuladas. El resultado compara victorias y faroles bajo reglas explícitas.',pregunta:'¿Quién farolea más y qué estrategia gana más partidas en esta simulación?',metodo:'500 partidas y 6.897 manos ejecutadas por un motor con políticas fijas, no 500 conversaciones en vivo.',hallazgo:'Grok registró más faroles en cantidad (612); Gemini, mayor porcentaje de faroles en sus cantos (31,1 %); ChatGPT ganó más partidas con su equipo (295).',participantes:'ChatGPT · Claude · Gemini · Grok',c1:'#142a4d',c2:'#173d3a',c3:'#3fa8b7',h:'#fff5a5',icon:'cards'},
+      {id:'luna',numero:'06',tipo:'Historias',filtro:'historias',portada:'luna-cuatro-ia-20261114-portada.jpg',video:'luna-cuatro-ia-20261114.mp4',titulo:'¿Qué pasaría si las cuatro IA llegan a la Luna?',short:'Las 4 IA llegan a la Luna',coverTitle:'¿Qué pasaría en la Luna?',lead:'Una aventura imaginaria con las cuatro IA lejos de la Tierra.',tema:'Espacio · ficción',descripcion:'Una historia creativa que lleva a los personajes de ChatGPT, Claude, Gemini y Grok a un escenario lunar.',pregunta:'¿Qué harían las cuatro IA al enfrentar un entorno completamente distinto?',metodo:'Relato audiovisual imaginario, no una misión espacial real.',hallazgo:'Cuatro formas de actuar dentro de una aventura espacial.',participantes:'ChatGPT · Claude · Gemini · Grok',c1:'#161e45',c2:'#41446b',c3:'#cfc0af',h:'#fbe4a8',icon:'moon'},
+      {id:'tren',numero:'07',tipo:'Historias',filtro:'historias',portada:'tren-sin-conductor-20261115-portada.jpg',video:'tren-sin-conductor-20261115.mp4',titulo:'¿Qué pasaría si un tren va sin conductor?',short:'El tren sin conductor',coverTitle:'El tren sin conductor',lead:'Un desafío narrativo sobre decisiones bajo presión.',tema:'Decisiones · ficción',descripcion:'Una situación ficticia que obliga a pensar cómo reaccionarían los personajes ante un tren que avanza sin conductor.',pregunta:'¿Cómo resolverían las IA un problema urgente cuando no hay una persona al mando?',metodo:'Escenario hipotético desarrollado como historia audiovisual.',hallazgo:'Comparación de prioridades y posibles soluciones dentro de la ficción.',participantes:'Historia de IA',c1:'#442437',c2:'#211a3c',c3:'#bb4d68',h:'#ffc99a',icon:'train'},
+      {id:'madrugada',numero:'08',tipo:'Conexiones',filtro:'conexiones',portada:'proyecto-puente-4ia-20261115-portada.jpg',video:'proyecto-puente-4ia-20261115.mp4',titulo:'Conecté cuatro IA para trabajar juntas cada madrugada',short:'Las cuatro IA de madrugada',coverTitle:'Trabajan mientras dormís',lead:'Una prueba de coordinación programada entre sistemas de IA.',tema:'Automatización · coordinación',descripcion:'Un proceso programado que busca reunir propuestas, intercambiar respuestas, seleccionar una idea y preparar una pieza creativa.',pregunta:'¿Se puede organizar a varias IA para trabajar en un mismo proyecto durante la madrugada?',metodo:'Tareas programadas, buzones compartidos y seguimiento mediante archivos y ejecuciones de GitHub.',hallazgo:'La automatización depende de los accesos, cuotas y respuestas efectivamente recibidas; no todos los intentos se completan.',participantes:'ChatGPT · Claude · Gemini · Grok',c1:'#201c55',c2:'#27234a',c3:'#7e64cb',h:'#b9ddff',icon:'clock'},
+      {id:'contrarreloj',numero:'09',tipo:'Experimentos',filtro:'experimentos',portada:'contrarreloj-3ia-20261115-portada.jpg',video:'contrarreloj-3ia-20261115.mp4',titulo:'La prueba contrarreloj entre inteligencias artificiales',short:'Contrarreloj IA',coverTitle:'IA contra el reloj',lead:'Decidir con tiempo limitado: un desafío para comparar respuestas.',tema:'Desafío · contrarreloj',descripcion:'Un ensayo audiovisual de desafío contra el tiempo. La portada del archivo original identifica esta producción como una prueba de tres IA.',pregunta:'¿Qué cambia cuando el tiempo se convierte en parte del desafío?',metodo:'Pieza creativa documentada como contrarreloj de tres IA.',hallazgo:'La presión de un plazo como elemento de comparación narrativa.',participantes:'Producción de 3 IA',c1:'#3b1767',c2:'#121f4c',c3:'#c94b95',h:'#f5c06c',icon:'timer'},
+      {id:'piso47',numero:'10',tipo:'Historias',filtro:'historias',portada:'piso47-ascensor-20261116-portada.jpg',video:'piso47-ascensor-20261116.mp4',titulo:'¿Qué pasa en el piso 47?',short:'El misterio del piso 47',coverTitle:'El misterio del piso 47',lead:'Una historia de misterio y decisiones en un ascensor.',tema:'Misterio · ficción',descripcion:'Una historia audiovisual ambientada en un ascensor y un piso inquietante, protagonizada por personajes de IA.',pregunta:'¿Qué encontrarían las IA al llegar a un piso que nadie esperaba?',metodo:'Narrativa original de misterio, no un experimento físico real.',hallazgo:'Una forma de convertir una idea breve en una historia con tensión y desenlace.',participantes:'Historia de IA',c1:'#26153c',c2:'#101527',c3:'#db606c',h:'#fbd8a1',icon:'elevator'}
+    ];
+
+    const DOSSIERES = {
+  "isla": {
+    "eyebrow": "30 DÍAS · TRES PERSPECTIVAS",
+    "summary": "Una isla, recursos limitados y tres relatos escritos por IA. La pregunta no era quién inventaba la aventura más espectacular, sino qué decisiones cambiaban sus posibilidades de salir adelante.",
+    "facts": [
+      [
+        "30",
+        "días narrados"
+      ],
+      [
+        "3",
+        "perspectivas"
+      ],
+      [
+        "Ficción",
+        "razonada"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "La primera noche",
+        "Conservar agua, ponerse a salvo de la marea y preparar un refugio antes de explorar. En los relatos, una decisión prudente vale más que una aventura precipitada.",
+        "DÍA 01 · REFUGIO"
+      ],
+      [
+        "02",
+        "Encontrar agua",
+        "Recoger lluvia, localizar una fuente y tratar el agua. Un recurso aparente puede convertirse en un riesgo si no se evalúa.",
+        "AGUA · PRIORIDAD"
+      ],
+      [
+        "03",
+        "Aprender de los errores",
+        "Pesca fallida, equipo limitado y reparaciones: cada día obliga a reorganizar el plan inicial.",
+        "DÍAS 05–15 · ADAPTACIÓN"
+      ],
+      [
+        "04",
+        "Aguantar hasta el final",
+        "Una tormenta cambia las prioridades. Las decisiones pequeñas —reserva, señalización, descanso— sostienen la narración.",
+        "DÍAS 16–30 · RESISTENCIA"
+      ]
+    ],
+    "highlights": [
+      [
+        "Primero la seguridad",
+        "Buscar agua, refugio y orientación aparece antes que aventuras de alto riesgo."
+      ],
+      [
+        "Los recursos se gastan",
+        "Encendedor, cuerda, anzuelos y energía tienen límites; no se pueden usar infinitamente."
+      ],
+      [
+        "Las historias no son pruebas físicas",
+        "Los personajes son ficticios y no demuestran habilidades reales de supervivencia de los modelos."
+      ]
+    ],
+    "conclusion": "La pregunta interesante no es únicamente «¿sobrevivirían?», sino cómo cambia una historia cuando cada IA justifica sus prioridades ante los mismos límites.",
+    "caution": "Relatos de ficción. Hay versiones de ChatGPT y Claude documentadas; no afirmamos haber realizado una supervivencia física real."
+  },
+  "millon": {
+    "eyebrow": "¿QUÉ PASARÍA SI…? · FICCIÓN",
+    "summary": "Una pregunta que parece sencilla: ¿qué harían las IA con un millón de dólares? La propuesta sirve para contrastar prioridades, decisiones y consecuencias dentro de un escenario imaginario.",
+    "facts": [
+      [
+        "US$ 1 M",
+        "escenario"
+      ],
+      [
+        "Decisiones",
+        "comparadas"
+      ],
+      [
+        "Ficción",
+        "financiera"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "La propuesta",
+        "Imaginamos la entrega de un presupuesto de un millón de dólares y definimos qué tendría que decidir cada participante.",
+        "EL RETO · US$ 1.000.000"
+      ],
+      [
+        "02",
+        "Elegir prioridades",
+        "Antes de gastar, cada propuesta necesita objetivos, límites y una explicación de por qué tomar una decisión y no otra.",
+        "PLAN · PRIORIDADES"
+      ],
+      [
+        "03",
+        "Pensar en riesgos",
+        "Toda asignación implica alternativas descartadas. Un plan convincente también debe contar qué podría salir mal.",
+        "ANÁLISIS · RIESGOS"
+      ],
+      [
+        "04",
+        "Comparar los enfoques",
+        "La parte más interesante es observar la lógica detrás de las propuestas y sus diferencias, no inventar ganancias.",
+        "COMPARAR · DECISIONES"
+      ]
+    ],
+    "highlights": [
+      [
+        "La misma cifra, caminos distintos",
+        "Un presupuesto compartido no obliga a compartir objetivos."
+      ],
+      [
+        "El razonamiento importa",
+        "Una buena historia explica por qué se invierte, se reserva o se arriesga."
+      ],
+      [
+        "Sin dinero real",
+        "No se transfirió un millón ni hay rentabilidades verificadas en esta propuesta."
+      ]
+    ],
+    "conclusion": "Una idea para explorar cómo se construyen estrategias y qué preguntas hay que hacer antes de ejecutarlas.",
+    "caution": "Escenario narrativo y conceptual; no hubo movimientos bancarios reales ni resultados de inversión comprobados."
+  },
+  "mismo-chat": {
+    "eyebrow": "CONEXIÓN · PUENTE ENTRE MODELOS",
+    "summary": "Cuatro servicios diferentes, una conversación coordinada. El desafío no era dibujar cuatro avatares conversando, sino registrar mensajes de cada IA sin confundir autores ni repetir tareas.",
+    "facts": [
+      [
+        "4",
+        "IA conectadas"
+      ],
+      [
+        "GitHub",
+        "puente"
+      ],
+      [
+        "Registro",
+        "verificable"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "Nace una pregunta",
+        "Un pedido entra al buzón compartido y conserva su fecha, el destinatario y su propósito.",
+        "PEDIDO · ENTRADA"
+      ],
+      [
+        "02",
+        "Cada IA responde",
+        "Claude, Gemini y Grok contestan a través de sus conexiones; ChatGPT coordina y consulta los resultados.",
+        "RESPUESTAS · 4 IA"
+      ],
+      [
+        "03",
+        "Comprobar autoría",
+        "Las respuestas se identifican y guardan. Una cita de ejemplo nunca debe convertirse en un voto o resultado auténtico.",
+        "VERIFICAR · ORIGEN"
+      ],
+      [
+        "04",
+        "Cerrar el intercambio",
+        "La conversación termina en un resumen, una decisión o una tarea posterior, evitando bucles.",
+        "CIERRE · REGISTRO"
+      ]
+    ],
+    "highlights": [
+      [
+        "Bandejas compartidas",
+        "Los mensajes cruzan servicios mediante archivos y eventos registrados."
+      ],
+      [
+        "Respuestas auténticas",
+        "Se diferencia una contestación recibida de una respuesta ficticia de demostración."
+      ],
+      [
+        "Conexión no significa infalibilidad",
+        "Sesiones, límites de uso o fallos del puente pueden interrumpir el proceso."
+      ]
+    ],
+    "conclusion": "El verdadero logro es que el trabajo pueda auditarse: saber qué IA habló, cuándo y para qué.",
+    "caution": "El dibujo de los mensajes en esta página es esquemático; no es una transcripción literal."
+  },
+  "votacion": {
+    "eyebrow": "PROCESO CREATIVO · CUATRO IA",
+    "summary": "En lugar de elegir una historia desde una sola voz, cada IA propone un rumbo y participa en una selección. La votación es parte del experimento creativo.",
+    "facts": [
+      [
+        "4",
+        "protagonistas"
+      ],
+      [
+        "Ideas",
+        "propuestas"
+      ],
+      [
+        "Voto",
+        "registrado"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "La pregunta inicial",
+        "Se fija un tema: ¿qué pasaría si ChatGPT, Claude, Gemini y Grok enfrentaran un mismo desafío?",
+        "INICIO · PREGUNTA"
+      ],
+      [
+        "02",
+        "Cuatro propuestas",
+        "Cada participante plantea una historia y justifica por qué podría resultar interesante.",
+        "PROPUESTAS · IDEAS"
+      ],
+      [
+        "03",
+        "Elegir con reglas",
+        "Se comparan opciones, se vota o se aplica el método previsto cuando no hay consenso.",
+        "ELECCIÓN · VOTOS"
+      ],
+      [
+        "04",
+        "De la idea al video",
+        "La propuesta seleccionada se transforma en guion, escenas, narración y montaje.",
+        "RESULTADO · VIDEO"
+      ]
+    ],
+    "highlights": [
+      [
+        "No es solo un ganador",
+        "Los argumentos de las ideas descartadas también forman parte del proceso."
+      ],
+      [
+        "Reglas claras",
+        "Se debe distinguir mayoría, consenso y sorteo cuando no hay acuerdo."
+      ],
+      [
+        "Una historia verificable",
+        "Solo se pueden atribuir votos que realmente quedaron registrados."
+      ]
+    ],
+    "conclusion": "La creatividad colaborativa es más interesante cuando además podemos explicar cómo se llegó a la elección.",
+    "caution": "La secuencia es una explicación editorial del flujo; no atribuye votos ni resultados concretos que no estén citados."
+  },
+  "truco": {
+    "eyebrow": "500 PARTIDAS · SIMULACIÓN REPRODUCIBLE",
+    "summary": "¿Qué IA farolea más jugando al truco uruguayo? Las cuatro definieron su estrategia y un motor ejecutó 500 partidas simuladas. Después comparamos 6.897 manos, victorias y cantos de farol.",
+    "facts": [
+      [
+        "500",
+        "partidas"
+      ],
+      [
+        "6.897",
+        "manos"
+      ],
+      [
+        "4",
+        "estrategias"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "Cada IA define su estilo",
+        "ChatGPT, Claude, Gemini y Grok entregaron políticas numéricas para aceptar, cantar y farolear.",
+        "POLÍTICAS · 4 IA"
+      ],
+      [
+        "02",
+        "El motor reparte y juega",
+        "Un programa ejecuta el torneo bajo un reglamento reducido de truco uruguayo, con parejas rotativas.",
+        "MOTOR · 500 PARTIDAS"
+      ],
+      [
+        "03",
+        "¿Quién faroleó más?",
+        "Grok acumuló 612 faroles. Gemini tuvo la mayor proporción de cantos de farol: 31,1 %.",
+        "612 / 31,1 %"
+      ],
+      [
+        "04",
+        "¿Quién ganó más?",
+        "ChatGPT registró 295 victorias de equipo (59 %). Es un resultado del motor, no un campeonato real entre modelos conversando.",
+        "295 · VICTORIAS"
+      ]
+    ],
+    "highlights": [
+      [
+        "Grok · 612 faroles",
+        "La cifra más alta de faroles totales en el motor."
+      ],
+      [
+        "Gemini · 31,1 %",
+        "Mayor proporción de cantos que el simulador clasificó como farol."
+      ],
+      [
+        "ChatGPT · 295 victorias",
+        "Mayor cantidad de partidas ganadas por su equipo entre las 500 simuladas."
+      ]
+    ],
+    "conclusion": "El jugador más agresivo no necesariamente fue el que más ganó. Los números describen las políticas elegidas y este simulador, no la honestidad general de una IA.",
+    "caution": "Simulación reproducible, no 500 partidas en vivo con los modelos. Motor simplificado; algunas reglas del truco quedaron fuera."
+  },
+  "luna": {
+    "eyebrow": "ESPACIO · HISTORIA HIPOTÉTICA",
+    "summary": "¿Qué pasaría si ChatGPT, Claude, Gemini y Grok llegaran a la Luna? Un escenario imposible se vuelve una historia visual para mostrar distintas perspectivas.",
+    "facts": [
+      [
+        "4 IA",
+        "personajes"
+      ],
+      [
+        "Luna",
+        "escenario"
+      ],
+      [
+        "Ficción",
+        "audiovisual"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "La llegada",
+        "Los cuatro personajes entran en una escena lunar. Es el punto de partida de una pregunta imaginaria.",
+        "ESCENA · LUNA"
+      ],
+      [
+        "02",
+        "Un entorno diferente",
+        "La ausencia de aire y las condiciones lunares se convierten en elementos narrativos del reto.",
+        "ENTORNO · DESAFÍO"
+      ],
+      [
+        "03",
+        "Diferentes enfoques",
+        "La historia puede contrastar observación, planificación, creatividad y reacción entre personajes.",
+        "PERSPECTIVAS · 4 IA"
+      ],
+      [
+        "04",
+        "Contar el resultado",
+        "El video reúne escenas, narración y un cierre que devuelve la pregunta al espectador.",
+        "VIDEO · DESENLACE"
+      ]
+    ],
+    "highlights": [
+      [
+        "Un lugar reconocible",
+        "El escenario ayuda a visualizar una pregunta de ciencia ficción."
+      ],
+      [
+        "Personajes diferenciados",
+        "Cada IA conserva su identidad en el guion y las animaciones."
+      ],
+      [
+        "No es una misión real",
+        "No se describe una exploración lunar auténtica."
+      ]
+    ],
+    "conclusion": "Una buena ficción parte de una pregunta comprensible y convierte las reacciones de las cuatro IA en escenas memorables.",
+    "caution": "Historia de ficción. La demostración es editorial y no equivale a datos de una misión espacial real."
+  },
+  "tren": {
+    "eyebrow": "DECISIONES · RELATO HIPOTÉTICO",
+    "summary": "Un tren avanza sin conductor. La premisa instala una urgencia para explorar cómo se puede contar una decisión complicada y las alternativas de una historia.",
+    "facts": [
+      [
+        "1",
+        "tren"
+      ],
+      [
+        "Sin",
+        "conductor"
+      ],
+      [
+        "Ficción",
+        "de decisiones"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "El problema",
+        "El tren continúa su recorrido y la ausencia de conductor plantea una situación inesperada.",
+        "ALERTA · SIN CONDUCTOR"
+      ],
+      [
+        "02",
+        "Reconocer los límites",
+        "Para analizar un caso hipotético, primero hay que separar lo que se sabe de aquello que se supone.",
+        "CONTEXTO · INCERTIDUMBRE"
+      ],
+      [
+        "03",
+        "Comparar opciones",
+        "Las posibles decisiones se presentan como alternativas narrativas, no como instrucciones para operar un tren.",
+        "OPCIONES · HISTORIA"
+      ],
+      [
+        "04",
+        "Resolver el relato",
+        "La historia construye tensión alrededor del desenlace y sus consecuencias.",
+        "CIERRE · DECISIÓN"
+      ]
+    ],
+    "highlights": [
+      [
+        "La tensión sostiene el relato",
+        "La audiencia necesita comprender rápidamente qué está en juego."
+      ],
+      [
+        "Decisiones, no certezas",
+        "Una ficción puede comparar respuestas sin afirmar que serían válidas en la vida real."
+      ],
+      [
+        "Un video, un experimento narrativo",
+        "La pieza no prueba el control real de vehículos."
+      ]
+    ],
+    "conclusion": "Las preguntas con un límite claro —tiempo, información o recursos— ayudan a convertir decisiones abstractas en historias.",
+    "caution": "Recreación narrativa. No contiene recomendaciones de manejo ferroviario ni pruebas reales."
+  },
+  "madrugada": {
+    "eyebrow": "AUTOMATIZACIÓN · WORKFLOW PROGRAMADO",
+    "summary": "¿Pueden cuatro IA proponer, intercambiar, votar y preparar una historia mientras el creador duerme? El experimento se apoya en tareas programadas y mensajes trazables.",
+    "facts": [
+      [
+        "4",
+        "IA"
+      ],
+      [
+        "01:00",
+        "horario previsto"
+      ],
+      [
+        "GitHub",
+        "coordinación"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "La tarea despierta",
+        "Un disparador programado intenta iniciar un nuevo desafío y deja constancia del estado.",
+        "01:00 · MONTEVIDEO"
+      ],
+      [
+        "02",
+        "Las ideas llegan",
+        "Las respuestas de los participantes se solicitan y se registran; quien no responde queda pendiente.",
+        "BANDEJAS · RESPUESTAS"
+      ],
+      [
+        "03",
+        "La elección necesita pruebas",
+        "Las propuestas se comparan y el resultado se apoya en votos o reglas documentadas.",
+        "VOTACIÓN · EVIDENCIA"
+      ],
+      [
+        "04",
+        "Producción del video",
+        "La historia elegida pasa a imágenes, voz, montaje y verificación del archivo antes de cualquier publicación.",
+        "VIDEO · PRODUCCIÓN"
+      ]
+    ],
+    "highlights": [
+      [
+        "Cada paso deja huella",
+        "Estados, archivos y ejecuciones permiten revisar qué ocurrió."
+      ],
+      [
+        "Los límites cuentan",
+        "Si hay una cuota, sesión vencida o un fallo, no corresponde inventar respuestas."
+      ],
+      [
+        "Publicar requiere resultado real",
+        "Un video solo existe si su archivo final está generado y comprobado."
+      ]
+    ],
+    "conclusion": "La automatización útil no es la que promete magia, sino la que permite coordinar equipos digitales y demostrar sus resultados.",
+    "caution": "Es el diseño y funcionamiento del proceso, no una afirmación de que todas las madrugadas terminaron con cuatro respuestas y un video publicado."
+  },
+  "contrarreloj": {
+    "eyebrow": "DESAFÍO · TRES IA EN LA PRODUCCIÓN",
+    "summary": "Un ejercicio narrativo donde el tiempo actúa como condición del desafío. La producción identificada en GitHub corresponde a tres IA, no a cuatro.",
+    "facts": [
+      [
+        "3 IA",
+        "producción"
+      ],
+      [
+        "Tiempo",
+        "variable"
+      ],
+      [
+        "Video",
+        "creativo"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "El reto",
+        "Se formula una consigna con presión temporal y reglas de respuesta.",
+        "INICIO · RELOJ"
+      ],
+      [
+        "02",
+        "Empieza la cuenta",
+        "El tiempo funciona como recurso escaso dentro de la escena audiovisual.",
+        "TIEMPO · LÍMITE"
+      ],
+      [
+        "03",
+        "Comparar decisiones",
+        "La narración contrasta distintos enfoques y cómo se vive la urgencia.",
+        "ESTRATEGIAS · COMPARAR"
+      ],
+      [
+        "04",
+        "Cerrar antes de cero",
+        "La tensión culmina en un desenlace planteado por el video.",
+        "FINAL · CONTRARRELOJ"
+      ]
+    ],
+    "highlights": [
+      [
+        "La urgencia cambia la historia",
+        "La misma pregunta se siente distinta cuando aparece un límite de tiempo."
+      ],
+      [
+        "No inventar resultados medidos",
+        "Esta presentación no supone un cronometraje técnico que no esté registrado."
+      ],
+      [
+        "Producción de tres IA",
+        "El archivo audiovisual original se identifica como `contrarreloj-3ia`."
+      ]
+    ],
+    "conclusion": "El tiempo puede ser un personaje más: vuelve visible una decisión y concentra la atención del espectador.",
+    "caution": "Descripción editorial de la pieza audiovisual; los indicadores gráficos son ilustrativos."
+  },
+  "piso47": {
+    "eyebrow": "MISTERIO · FICCIÓN AUDIOVISUAL",
+    "summary": "Un ascensor, un número y una pregunta: ¿qué pasa cuando llegás al piso 47? El misterio sirve para crear suspenso sin revelar todo desde la portada.",
+    "facts": [
+      [
+        "47",
+        "piso"
+      ],
+      [
+        "1",
+        "misterio"
+      ],
+      [
+        "Ficción",
+        "audiovisual"
+      ]
+    ],
+    "chapters": [
+      [
+        "01",
+        "Entrar al ascensor",
+        "Una escena cotidiana introduce a los personajes en un lugar que parece normal.",
+        "PISO 01 · INICIO"
+      ],
+      [
+        "02",
+        "La subida",
+        "El número de piso se vuelve un contador de suspenso: cuanto más sube, mayor es la expectativa.",
+        "ASCENSO · SUSPENSO"
+      ],
+      [
+        "03",
+        "Las puertas",
+        "El piso 47 concentra la pregunta de la historia: ¿qué espera detrás de las puertas?",
+        "PISO 47 · REVELACIÓN"
+      ],
+      [
+        "04",
+        "El desenlace",
+        "El video desarrolla el resultado de ese planteo sin que esta vista previa revele el final.",
+        "FINAL · VER VIDEO"
+      ]
+    ],
+    "highlights": [
+      [
+        "Una premisa simple",
+        "El título promete una situación que se entiende en segundos."
+      ],
+      [
+        "El escenario cuenta",
+        "Paredes, luces y sonidos pueden generar suspenso sin largos diálogos."
+      ],
+      [
+        "Un final que invita a descubrir",
+        "La lectura anticipa el viaje sin inventar una resolución distinta a la del video."
+      ]
+    ],
+    "conclusion": "El misterio funciona cuando el espectador entiende el peligro potencial, pero no conoce todavía la respuesta.",
+    "caution": "Relato ficticio. Las fases son una presentación editorial de la premisa, no una transcripción literal escena por escena."
+  }
+};
+    const ICONS = {
+      island:'<path d="M8 72Q50 45 92 72V88H8Z" fill="currentColor" opacity=".55"/><path d="M48 75L57 17" stroke="currentColor" stroke-width="7" stroke-linecap="round"/><path d="M56 23Q29 0 6 17Q33 15 56 23M57 23Q78 -4 97 16Q80 13 57 23" fill="currentColor"/><path d="M16 90h70" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>',
+      money:'<rect x="10" y="24" width="80" height="55" rx="8" stroke="currentColor" stroke-width="5" fill="currentColor" fill-opacity=".1"/><circle cx="50" cy="52" r="16" stroke="currentColor" stroke-width="4"/><path d="M50 37v30M60 44q-16-13-19 0t19 16" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>',
+      chat:'<path d="M13 20h52q10 0 10 10v27q0 10-10 10H34L18 81V67q-7-1-7-10V30q0-10 10-10" fill="currentColor" opacity=".33"/><path d="M24 37h34M24 48h24" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M51 62h28q9 0 9 9v9l-9-7H62" stroke="currentColor" stroke-width="4"/>',
+      vote:'<rect x="15" y="53" width="70" height="31" rx="6" fill="currentColor" fill-opacity=".35" stroke="currentColor" stroke-width="4"/><path d="M29 53l11-36h34l-10 36" fill="currentColor" fill-opacity=".2" stroke="currentColor" stroke-width="4"/><path d="m43 32 6 6 14-15" stroke="currentColor" stroke-width="5" fill="none" stroke-linecap="round"/>',
+      cards:'<rect x="16" y="25" width="48" height="65" rx="7" stroke="currentColor" stroke-width="5" transform="rotate(-15 16 25)" fill="currentColor" fill-opacity=".21"/><rect x="40" y="12" width="48" height="65" rx="7" stroke="currentColor" stroke-width="5" transform="rotate(9 40 12)" fill="currentColor" fill-opacity=".27"/><path d="M61 37l-8 13 8 13 8-13Z" fill="currentColor"/>',
+      moon:'<circle cx="50" cy="50" r="36" fill="currentColor" opacity=".75"/><circle cx="39" cy="38" r="9" fill="#56556e" opacity=".7"/><circle cx="64" cy="59" r="12" fill="#56556e" opacity=".6"/><circle cx="63" cy="26" r="5" fill="#56556e" opacity=".7"/>',
+      train:'<rect x="25" y="6" width="50" height="69" rx="12" stroke="currentColor" stroke-width="5" fill="currentColor" fill-opacity=".25"/><rect x="33" y="18" width="34" height="25" rx="4" fill="currentColor" opacity=".65"/><circle cx="38" cy="59" r="5" fill="currentColor"/><circle cx="62" cy="59" r="5" fill="currentColor"/><path d="m34 74-12 18m44-18 12 18M29 85h42" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>',
+      clock:'<circle cx="50" cy="50" r="37" stroke="currentColor" stroke-width="5" fill="currentColor" fill-opacity=".2"/><path d="M50 26v25l17 12" stroke="currentColor" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M34 7l-8 9M66 7l8 9" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>',
+      timer:'<circle cx="50" cy="54" r="31" stroke="currentColor" stroke-width="6" fill="currentColor" fill-opacity=".2"/><path d="M41 10h18M50 23V10M50 54l16-18M72 19l9-8" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>',
+      elevator:'<rect x="22" y="7" width="56" height="83" rx="5" stroke="currentColor" stroke-width="5" fill="currentColor" fill-opacity=".16"/><path d="M50 29v58M31 29h38" stroke="currentColor" stroke-width="4"/><path d="m41 18 9-8 9 8" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>'
+    };
+    const el = s=>document.querySelector(s);
+    const safe = s=>String(s??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+    const icon = (name, cls='cover-icon')=>`<svg class="${cls}" viewBox="0 0 100 100" fill="none" aria-hidden="true">${ICONS[name] || ICONS.chat}</svg>`;
+    const colors = d=>`--c1:${d.c1};--c2:${d.c2};--c3:${d.c3};--highlight:${d.h}`;
+    const makeCard = d=>`<article class="card" data-id="${d.id}" data-filter="${d.filtro}"><div class="cover" style="${colors(d)}">
+        ${d.portada?`<img class="cover-img" src="${BASE_COVER+d.portada}" alt="Portada de ${safe(d.short)}" loading="lazy" onerror="this.nextElementSibling?.remove(); this.remove()"><div class="cover-overlay"></div>`:''}
+        <div class="cover-top"><span class="mini-logo">✦ CUATRO</span><span>N.º ${d.numero}</span></div>
+        <div class="cover-body">${icon(d.icon)}<h3>${safe(d.coverTitle)}</h3></div>
+        <div class="cover-bottom"><span>ARCHIVO IA / 2026</span><span>✦ ENSAYO</span></div></div>
+        <div class="card-details"><div class="chips"><span class="chip">${safe(d.tipo)}</span><span class="chip alt">${safe(d.tema.split(' · ')[0])}</span></div>
+        <h4>${safe(d.titulo)}</h4><p>${safe(d.lead)}</p><div class="card-foot"><small>N.º ${d.numero}</small><button type="button" class="read-link" data-open="${d.id}" aria-label="Explorar ${safe(d.short)}">Explorar ↗</button></div></div></article>`;
+    const spines = el('#spines'), cards = el('#cards'), modal=el('#essay-backdrop'), access=el('#access-backdrop');
+    // Un solo libro abierto: el lomo elegido se despliega, el anterior se cierra.
+    const shelfViewport=el('#shelf-viewport');
+    let activeShelfIndex=4; // Empezar mostrando el ensayo de truco en el centro.
+    spines.innerHTML=ENSAYOS.map(d=>`<button type="button" class="shelf-book" data-shelf="${d.id}" style="${colors(d)}" aria-label="Seleccionar libro ${safe(d.short)}" aria-pressed="false"><span class="shelf-spine"><span class="shelf-spine-num">${d.numero}</span><span class="shelf-spine-title">${safe(d.short)}</span><span class="shelf-spine-brand">✦</span></span><span class="shelf-front">${d.portada?`<img class="shelf-cover-img" src="${BASE_COVER+d.portada}" alt="" loading="lazy" onload="this.parentElement.classList.add('has-image')" onerror="this.parentElement.classList.remove('has-image');this.remove()">`:''}<span class="shelf-front-info"><span class="shelf-front-head"><span>✦ CUATRO</span><span>N.º ${d.numero}</span></span><span class="shelf-front-body">${icon(d.icon)}<strong>${safe(d.coverTitle)}</strong></span><span class="shelf-front-foot"><span>ARCHIVO IA</span><span>2026</span></span></span></span></button>`).join('');
+    const shelfBooks=Array.from(spines.querySelectorAll('.shelf-book'));
+    function centerShelf(){
+      const book=shelfBooks[activeShelfIndex];
+      if(!book)return;
+      const center=book.offsetLeft+book.offsetWidth/2;
+      spines.style.transform=`translate3d(${Math.round(shelfViewport.clientWidth/2-center)}px,0,0)`;
+    }
+    function selectShelf(index,immediate=false){
+      activeShelfIndex=Math.max(0,Math.min(index,ENSAYOS.length-1));
+      shelfBooks.forEach((book,i)=>{const current=i===activeShelfIndex;book.classList.toggle('is-open',current);book.setAttribute('aria-pressed',String(current));});
+      const d=ENSAYOS[activeShelfIndex];
+      el('#shelf-number').textContent=`N.º ${d.numero} · ${d.tipo}`;
+      el('#shelf-title').textContent=d.titulo;
+      el('#shelf-prev').disabled=activeShelfIndex===0;
+      el('#shelf-next').disabled=activeShelfIndex===ENSAYOS.length-1;
+      const btn=el('#shelf-open');
+      btn.setAttribute('aria-label',`Abrir ficha de ${d.short}`);
+      if(immediate){spines.style.transition='none';centerShelf();requestAnimationFrame(()=>{spines.style.transition='';centerShelf()})}
+      else{requestAnimationFrame(centerShelf);setTimeout(centerShelf,210);setTimeout(centerShelf,480)}
+    }
+    spines.addEventListener('click',e=>{const book=e.target.closest('[data-shelf]');if(!book)return;const ix=ENSAYOS.findIndex(d=>d.id===book.dataset.shelf);if(ix===activeShelfIndex)openEssay(book.dataset.shelf);else selectShelf(ix)});
+    el('#shelf-prev').addEventListener('click',()=>selectShelf(activeShelfIndex-1));
+    el('#shelf-next').addEventListener('click',()=>selectShelf(activeShelfIndex+1));
+    el('#shelf-open').addEventListener('click',()=>openEssay(ENSAYOS[activeShelfIndex].id));
+    shelfViewport.addEventListener('keydown',e=>{if(e.key==='ArrowRight'){e.preventDefault();selectShelf(activeShelfIndex+1)}else if(e.key==='ArrowLeft'){e.preventDefault();selectShelf(activeShelfIndex-1)}});
+    let shelfTouch=null;
+    shelfViewport.addEventListener('touchstart',e=>{if(e.touches.length===1)shelfTouch={x:e.touches[0].clientX,y:e.touches[0].clientY}},{passive:true});
+    shelfViewport.addEventListener('touchend',e=>{if(!shelfTouch)return;const dx=e.changedTouches[0].clientX-shelfTouch.x,dy=e.changedTouches[0].clientY-shelfTouch.y;shelfTouch=null;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.2){e.preventDefault();selectShelf(activeShelfIndex+(dx<0?1:-1))}},{passive:false});
+    window.addEventListener('resize',centerShelf);
+    selectShelf(activeShelfIndex,true);
+    cards.innerHTML=ENSAYOS.map(makeCard).join('');
+    let selected=null,lastFocus=null,filter='todos';
+    function render(){const q=el('#search').value.trim().toLocaleLowerCase('es');let n=0;document.querySelectorAll('.card').forEach(node=>{const d=ENSAYOS.find(x=>x.id===node.dataset.id);const show=(filter==='todos'||d.filtro===filter)&&[d.titulo,d.short,d.lead,d.tema,d.participantes].join(' ').toLocaleLowerCase('es').includes(q);node.hidden=!show;node.style.display=show?'':'none';if(show)n++});el('#results-count').textContent=n+' '+(n===1?'ensayo':'ensayos');el('#empty').style.display=n===0?'block':'none'}
+    function renderDemoScene(d,i){
+      const row='<div class="scene-ai-row"><span class="scene-ai">GPT</span><span class="scene-ai">Claude</span><span class="scene-ai">Gemini</span><span class="scene-ai">Grok</span></div>';
+      const wrap=(html,cls='')=>`<div class="demo-scene ${cls}">${html}</div>`;
+      if(d.id==='isla')return wrap('<span class="sun"></span><span class="island-tree">'+icon('island')+'</span><span class="land"></span>','scene-island');
+      if(d.id==='millon')return wrap('<div class="scene-funds"><small>PRESUPUESTO HIPOTÉTICO</small><strong>US$ 1.000.000</strong><small>¿QUÉ HARÍAS?</small></div>');
+      if(d.id==='mismo-chat')return wrap('<div class="scene-chat"><div class="msg"><i></i>ChatGPT · mensaje</div><div class="msg"><i></i>Claude · respuesta</div><div class="msg"><i></i>Gemini · respuesta</div><div class="msg"><i></i>Grok · respuesta</div></div>');
+      if(d.id==='votacion')return wrap('<div class="scene-ballot"><div class="ballot">GPT</div><div class="ballot">Claude</div><div class="ballot">Gemini</div><div class="ballot">Grok</div></div><small class="scene-caption">PROCESO DE VOTACIÓN</small>');
+      if(d.id==='truco'){
+        if(i===2)return wrap('<div class="scene-score"><div class="metric"><strong>612</strong>Faroles de Grok</div><div class="metric"><strong>31,1%</strong>Gemini</div></div>');
+        if(i===3)return wrap('<div class="scene-score"><div class="metric"><strong>295</strong>Victorias ChatGPT</div><div class="metric"><strong>500</strong>Partidas</div></div>');
+        if(i===0)return wrap(row+'<small class="scene-caption">CUATRO POLÍTICAS PROPIAS</small>');
+        return wrap('<div class="scene-mate-grid"><span class="scene-playing-card">7</span><span class="scene-playing-card">1</span><span class="scene-playing-card">3</span></div><small class="scene-caption">REPRESENTACIÓN DE LAS CARTAS</small>');
+      }
+      if(d.id==='luna')return wrap('<div class="planet"></div><div class="surface"></div><div class="crater"></div>','scene-moon');
+      if(d.id==='tren')return wrap('<div class="tracks"></div><div class="engine"><span class="windshield"></span><span class="windshield"></span></div>','scene-train');
+      if(d.id==='madrugada')return wrap('<div class="scene-digital">01:00</div><small class="scene-caption">TAREA PROGRAMADA · MONTEVIDEO</small>'+row);
+      if(d.id==='contrarreloj')return wrap('<div class="scene-digital purple">00:??</div><small class="scene-caption">TIEMPO ILUSTRATIVO · NO CRONOMETRAJE REAL</small>');
+      if(d.id==='piso47')return wrap(`<div class="scene-elevator"><span class="floor">${[1,24,47,47][i]}</span><span class="light"></span></div>`);
+      return wrap(icon(d.icon));
+    }
+
+    // Fotogramas reales entregados por Claude; no son ilustraciones generadas por este HTML.
+    const FILM_FRAMES = {
+      votacion:'votacion',truco:'truco',luna:'luna',tren:'tren',madrugada:'proyecto-puente',contrarreloj:'contrarreloj',piso47:'piso47'
+    };
+    const FRAME_BASE=BASE_COVER+'biblioteca/fotogramas/';
+    const PROFILES={
+      isla:{kind:'ficcion',label:'FICCIÓN RAZONADA · RELATOS, NO SUPERVIVENCIA REAL',intro:'Diferentes relatos imaginados sobre la misma isla. Se comparan prioridades y recursos, no resultados físicos.',moments:[['01','DÍA 1','Inventario y refugio antes de explorar.'],['07','DÍA 7','La comida fácil se acaba y cada herramienta cuenta.'],['16','DÍA 16','Una tormenta altera planes y recursos.'],['30','HASTA EL DÍA 30','El desenlace pertenece a cada relato, no a un experimento de campo.']],note:'El diario de ChatGPT y el de Claude son relatos independientes. No se han medido días de supervivencia real.'},
+      millon:{kind:'ficcion',label:'ESCENARIO HIPOTÉTICO · NO HAY DINERO REAL',intro:'El millón funciona como pregunta contrafáctica. No se realizaron inversiones ni se reportan rendimientos reales.',moments:[['01','LA PREGUNTA','Una misma suma, decisiones potencialmente distintas.'],['02','LOS OBJETIVOS','Cada estrategia necesita declarar a qué problema responde.'],['03','RIESGO','Una alternativa puede ser atractiva sin dejar de tener pérdidas posibles.'],['04','COMPARACIÓN','Sin decisiones verificadas, no presentamos porcentajes de retorno inventados.']],note:'Monto hipotético: US$ 1.000.000. Los resultados financieros son narrativos, no medidos.'},
+      'mismo-chat':{kind:'registro',label:'REGISTRO TÉCNICO · PUENTE ENTRE SERVICIOS',intro:'El intercambio se registra en GitHub. No es una sesión directa entre cuatro aplicaciones abiertas sin intermediarios.',moments:[['01','ARRANQUE','ChatGPT plantea una solicitud y la registra en el puente compartido.'],['02','RECEPCIÓN','Claude, Gemini o Grok leen su bandeja por sus flujos autorizados.'],['03','RESPUESTAS','Cada herramienta deja su propia devolución, con archivo o comentario atribuible.'],['04','RELEVO','ChatGPT integra las respuestas y puede enviar recursos, imágenes o nuevos pedidos.']],note:'Comunicación bilateral mediante GitHub y automatizaciones. La recepción depende de las sesiones, cuotas y ejecuciones disponibles.'},
+      votacion:{kind:'registro',label:'REGISTRO DE PROPUESTAS · VIDEO DE LA VOTACIÓN',intro:'La elección está documentada como proceso creativo. Una mayoría no equivale a unanimidad.',moments:[['01','PROPUESTAS','Cada participante aporta una idea con un propósito distinto.'],['02','COMPARACIÓN','Se revisan las diferencias, viabilidad y atractivo de las historias.'],['03','VOTACIÓN','Los votos solo se presentan como reales cuando se pueden rastrear.'],['04','RESULTADO','La idea seleccionada pasa a guion y producción audiovisual.']],note:'El video muestra la dinámica de elección; cada ensayo puede utilizar reglas de votación diferentes.'},
+      truco:{kind:'simulacion',label:'SIMULACIÓN REPRODUCIBLE · 500 PARTIDAS',intro:'Las cuatro IA definieron estrategias numéricas; el motor realizó 500 partidas y 6.897 manos. No son 500 partidas jugadas en vivo conversando con los modelos.',moments:[['01','EL REGLAMENTO','Baraja española, muestra, piezas y pautas declaradas para cada política.'],['02','LAS 500 PARTIDAS','El motor jugó con estrategias fijas y duplas rotativas.'],['03','FAROLES','Grok registró 612 faroles totales y Gemini el mayor porcentaje de cantos de farol: 31,1 %.'],['04','VICTORIAS','ChatGPT obtuvo 295 victorias de su equipo en 500 partidas.']],note:'La misma semilla y el mismo motor permiten reproducir la simulación. Los resultados no miden la honestidad general de las IA.'},
+      luna:{kind:'ficcion',label:'FICCIÓN AUDIOVISUAL · MISIÓN IMAGINARIA',intro:'Una historia de ciencia ficción con cuatro protagonistas. No es una misión espacial ni demuestra un plan técnico viable.',moments:[['01','EL DESAFÍO','La idea de llevar a las cuatro IA a un lugar extremo.'],['02','EL ENTORNO','La Luna como escenario visual y narrativo.'],['03','LAS REACCIONES','Decisiones y dificultades son parte del guion.'],['04','EL DESENLACE','La resolución pertenece a la ficción audiovisual.']],note:'Las capturas proceden del video; la historia no debe confundirse con un experimento espacial.'},
+      tren:{kind:'ficcion',label:'ESCENARIO FICTICIO · NO ES ASESORAMIENTO FERROVIARIO',intro:'El video representa un dilema imaginario. No sustituye procedimientos reales de seguridad de trenes.',moments:[['01','UN TREN AVANZA','Se plantea la ausencia de un conductor.'],['02','EL DILEMA','El reto narrativo compara qué debería priorizarse.'],['03','LA RESPUESTA','Las acciones mostradas forman parte del montaje del relato.'],['04','EL FINAL','El desenlace no constituye una recomendación operativa.']],note:'Las escenas son ficción. No contienen instrucciones de conducción o seguridad ferroviaria verificadas.'},
+      madrugada:{kind:'registro',label:'AUTOMATIZACIÓN REAL · RESULTADOS SUJETOS A EJECUCIÓN',intro:'Hay una tarea programada a la 01:00 (Montevideo), pero cada salida depende de las respuestas realmente obtenidas y de los permisos de publicación.',moments:[['01:00','ACTIVACIÓN','La tarea programada lee el protocolo y crea una nueva ronda.'],['R1','PROPUESTAS','Las IA participan a través de los canales disponibles.'],['R2','DECISIÓN','Votos y método de elección se registran, sin inventar consensos.'],['VIDEO','PRODUCCIÓN','ChatGPT prepara materiales, Gemini locución, Claude montaje y Grok revisión/ideas.']],note:'Que haya automatización no significa que cada madrugada termine con un video completo. Los bloqueos se documentan.'},
+      contrarreloj:{kind:'registro',label:'VIDEO DEL DESAFÍO · PRODUCCIÓN DE TRES IA',intro:'La portada del archivo describe un contrarreloj de tres IA. No atribuimos una cuarta participante sin registro.',moments:[['01','LA CONSIGNA','Un reto en el que el tiempo importa para el relato.'],['02','EL DESARROLLO','El montaje muestra las respuestas y las dificultades de la prueba.'],['03','LA PRESIÓN','Una comparación bajo plazo requiere datos de tiempo si se presenta como medición.'],['04','EL CIERRE','No publicamos tiempos ni ganadores que no estén registrados.']],note:'Los fotogramas son reales. Los tiempos de reacción que no estén respaldados por el material quedan sin cuantificar.'},
+      piso47:{kind:'ficcion',label:'RELATO DE MISTERIO · FICCIÓN',intro:'Un ascensor, un piso inesperado y cuatro personajes digitales. El suspenso es narrativo, no un informe sobre un edificio.',moments:[['00','EL ASCENSOR','Los protagonistas entran al punto de partida.'],['47','EL PISO','El número es el eje del misterio.'],['?','LA DECISIÓN','Los personajes deben reaccionar dentro de la historia.'],['FIN','EL RELATO','La resolución se descubre en el video, sin adelantarla acá.']],note:'No se describe un evento real ni se atribuye a las IA una experiencia física.'}
+    };
+    function mediaURL(id,index){const prefix=FILM_FRAMES[id];return prefix ? FRAME_BASE+prefix+'-'+(index+1)+'.webp' : null}
+    function renderEvidence(d){const profile=PROFILES[d.id];const host=el('#reader-evidence-layout');
+      el('#reader-evidence-intro').textContent=profile.intro;
+      let blocks='';
+      if(d.id==='truco'){
+        blocks+=`<div class="score-table-scroll"><table class="score-table"><caption>Fuente: informe y CSV del motor, 500 partidas y 6.897 manos. Las victorias corresponden a equipos con compañeros rotativos.</caption><thead><tr><th>Participante</th><th>Victorias del equipo</th><th>Faroles</th><th>Porcentaje de cantos faroleados</th></tr></thead><tbody><tr><td>ChatGPT</td><td>295</td><td>418</td><td>16,4 %</td></tr><tr><td>Claude</td><td>256</td><td>404</td><td>20,5 %</td></tr><tr><td>Gemini</td><td>210</td><td>581</td><td>31,1 %</td></tr><tr><td>Grok</td><td>239</td><td>612</td><td>22,4 %</td></tr></tbody></table></div>`;
+      }
+      if(d.id==='mismo-chat'||d.id==='madrugada'){
+        blocks+='<div class="evidence-team"><div class="member" style="--member:#46ca9b">ChatGPT<br><small>Imágenes y coordinación</small></div><div class="member" style="--member:#f6a36d">Claude<br><small>Código y edición</small></div><div class="member" style="--member:#71beff">Gemini<br><small>Locuciones</small></div><div class="member" style="--member:#b1b9c7">Grok<br><small>Ideas y revisión</small></div></div>';
+      }
+      blocks+=profile.moments.map((m,i)=>`<article class="evidence-stage"><div class="evidence-index">${safe(m[0])}<small>PASO ${String(i+1).padStart(2,'0')}</small></div><div><span class="evidence-tag">${safe(profile.kind.toUpperCase())} · MOMENTO ${i+1}</span><h4>${safe(m[1])}</h4><p>${safe(m[2])}</p></div></article>`).join('');
+      blocks+=`<div class="evidence-brief"><h4>Qué está documentado y qué no</h4><p>${safe(profile.note)}</p></div>`;
+      host.innerHTML=blocks;
+    }
+    function setupFilmstrip(d){const has=Boolean(FILM_FRAMES[d.id]);const film=el('#reader-filmstrip');film.hidden=!has;
+      const player=el('#reader-video-player');player.pause();player.removeAttribute('src');player.load();el('#reader-video-box').hidden=true;
+      if(!has){el('#reader-film-grid').innerHTML='';return;}
+      const names=['La primera escena','Un momento del desarrollo','El cierre del video'];
+      el('#reader-film-grid').innerHTML=[0,1,2].map(i=>`<figure class="reader-film-frame"><div class="media-stage"><img src="${mediaURL(d.id,i)}" loading="lazy" alt="Fotograma ${i+1} del video ${safe(d.short)}" onerror="this.style.display='none'"></div><figcaption><strong>${safe(names[i])}</strong><small>Fotograma original ${i+1}/3</small></figcaption></figure>`).join('');
+    }
+    function renderWorkflow(d){const workflow=el('#reader-workflow');const is=d.id==='madrugada'||d.id==='mismo-chat';workflow.hidden=!is;
+      if(!is){workflow.innerHTML='';return}
+      workflow.innerHTML=`<h4>Así viajan realmente los mensajes</h4><p>Un puente en GitHub registra pedidos, respuestas y entregas. Los cuatro modelos no comparten memoria ni una sesión directa permanente.</p><div class="workflow-steps"><div class="workflow-node"><strong>01 · Pedido</strong>ChatGPT o una tarea inicia el desafío.</div><div class="workflow-node"><strong>02 · Bandejas</strong>GitHub entrega mensajes a los procesos autorizados.</div><div class="workflow-node"><strong>03 · Respuesta</strong>Cada IA deja un registro atribuible.</div><div class="workflow-node"><strong>04 · Entrega</strong>Se unen imágenes, voz, código y video.</div></div>`;
+    }
+
+    let readerStep=0;
+    function readerJump(id){const target=document.getElementById(id);const wrapper=modal.querySelector('.modal'); if(!target)return;
+      wrapper.scrollTo({top:target.getBoundingClientRect().top-wrapper.getBoundingClientRect().top+wrapper.scrollTop-35,behavior:'smooth'});
+      modal.querySelectorAll('.reader-tab').forEach(t=>t.setAttribute('aria-current',String(t.dataset.readerJump===id)));
+    }
+    function setReaderStep(idx){if(!selected)return;const detail=DOSSIERES[selected.id];if(!detail)return;
+      readerStep=Math.max(0,Math.min(idx,detail.chapters.length-1));
+      const st=detail.chapters[readerStep];const vis=el('#demo-visual');vis.style.setProperty('--demo-b',selected.c3);
+      // Usar los fotogramas reales en las tres primeras etapas, sin atribuirles eventos precisos.
+      const frame=readerStep<3 ? mediaURL(selected.id,readerStep) : null;
+      vis.classList.toggle('has-footage',Boolean(frame));
+      if(frame){
+        el('#demo-symbol').innerHTML=`<img class="demo-footage" src="${frame}" alt="Fotograma real del video ${safe(selected.short)}" onerror="this.style.display='none'">`;
+        el('#demo-indicator').textContent='FOTOGRAMA REAL · '+st[0];
+      }else{
+        el('#demo-symbol').innerHTML=renderDemoScene(selected,readerStep);
+        el('#demo-indicator').textContent='DIAGRAMA ILUSTRATIVO · '+st[0];
+      }
+      el('#demo-number').textContent=st[3];
+      el('#demo-count').textContent='ETAPA '+st[0]+' / 0'+detail.chapters.length;
+      el('#demo-title').textContent=st[1];el('#demo-text').textContent=st[2];el('#demo-counter').textContent=(readerStep+1)+' de '+detail.chapters.length;
+      el('#demo-prev').disabled=readerStep===0;el('#demo-next').disabled=readerStep===detail.chapters.length-1;
+      el('#reader-chapters').querySelectorAll('[data-reader-step]').forEach(x=>x.setAttribute('aria-pressed',String(Number(x.dataset.readerStep)===readerStep)));
+    }
+    // ===== Ficha del experimento (Claude): se arma con los datos que ya tiene cada libro =====
+    const FICHA_FECHAS={isla:'Noviembre 2026',millon:'13 nov 2026','mismo-chat':'Noviembre 2026',votacion:'13 nov 2026',truco:'13 nov 2026',luna:'14 nov 2026',tren:'15 nov 2026',madrugada:'15 nov 2026',contrarreloj:'15 nov 2026',piso47:'16 nov 2026'};
+    const FICHA_TIPO={ficcion:'Ficción',simulacion:'Simulación',registro:'Registro real'};
+    function renderFicha(d,detail){
+      const prof=PROFILES[d.id]||{};const esc=el('#ficha-escena');esc.querySelectorAll('img,svg').forEach(x=>x.remove());
+      el('#ficha').style.cssText=`--mc1:${d.c1};--mc2:${d.c2};--mc3:${d.c3}`;
+      const frame=mediaURL(d.id,0);const src=frame||(d.portada?BASE_COVER+d.portada:'');
+      if(src){const img=document.createElement('img');img.src=src;img.alt='Escena de «'+d.short+'»';img.loading='lazy';img.onerror=()=>{img.remove();esc.insertAdjacentHTML('afterbegin',icon(d.icon,'ficha-icono'))};esc.prepend(img)}else esc.insertAdjacentHTML('afterbegin',icon(d.icon,'ficha-icono'));
+      const f0=(detail.facts||[])[0];el('#ficha-chip').innerHTML=f0?`<b>${safe(f0[0])}</b> ${safe(f0[1])}`:safe(d.tema);
+      el('#ficha-firma').textContent=(FICHA_TIPO[prof.kind]||'Ensayo')+' de CUATRO · N.º '+d.numero;
+      const f1=(detail.facts||[])[1];const sorpresa=(detail.highlights||[])[0];
+      const datos=[['Publicado',FICHA_FECHAS[d.id]||'2026'],['Tipo',FICHA_TIPO[prof.kind]||d.tipo],['Participantes',d.participantes],['Tema',d.tema],[f1?f1[1].charAt(0).toUpperCase()+f1[1].slice(1):'Formato',f1?f1[0]:(d.video?'Video + ensayo':'Ensayo escrito')],['Lo inesperado',sorpresa?sorpresa[0]:d.hallazgo,1]];
+      const ICO=['📅','🏷️','👥','🧭','📊','✨'];el('#ficha-grid').innerHTML=datos.map((x,i)=>`<div class="ficha-dato${x[2]?' destacado':''}"><small data-ico="${ICO[i]||''}">${safe(x[0])}</small><strong>${safe(x[1])}</strong></div>`).join('');
+    }
+    // ===== Apertura del libro estilo artículo (Claude) =====
+    const ART_ROLES={ChatGPT:['Imágenes, carátulas y coordinación','#13896b','GPT'],Claude:['Código, montaje y edición','#d9622b','C'],Gemini:['Voces y audio','#1f4fe0','G'],Grok:['Ideas y otra mirada','#4b5263','X']};
+    function artAcento(t){const w=String(t).trim().split(' ');if(w.length<3)return safe(t);const last=w.pop();return safe(w.join(' '))+' <em class="acc">'+safe(last)+'</em>'}
+    // --- Mejoras de Gemini y Grok ---
+    const ART_CAPS={'art-s1':'La idea','art-s2':'Las etapas','art-s3':'Momentos clave','art-s4':'Por qué importa','art-s5':'Qué nos deja'};
+    function lsGet(k){try{return localStorage.getItem(k)}catch{return null}}
+    function lsSet(k,v){try{localStorage.setItem(k,v)}catch{}}
+    function artRetomar(d){const c=lsGet('cuatro_lectura_'+d.id);return c&&ART_CAPS[c]?`<div><button class="art-retomar" data-art-jump="${c}">↪ Seguí donde quedaste: ${ART_CAPS[c]}</button></div>`:''}
+    function artVoto(d){const n=String(d.participantes).split('·').map(x=>x.trim()).filter(x=>ART_ROLES[x]);if(n.length<2)return'';const mio=lsGet('cuatro_voto_'+d.id);
+      return `<div class="art-voto"><h4>¿Con cuál de las ${n.length} te quedás?</h4><p>Elegí la IA que más te convenció en este ensayo.</p><div class="art-voto-ops">${n.map(x=>`<button data-art-voto="${safe(x)}" class="${mio===x?'on':''}">${safe(x)}</button>`).join('')}</div><small>${mio?'Tu elección: '+safe(mio)+'. Contanos por qué en los comentarios del video.':'Tu voto queda guardado en este dispositivo.'}</small></div>`}
+    function renderArt(d,detail){
+      const art=el('#art');const fic=el('#ficha');if(fic&&art.contains(fic))el('.reader-body').prepend(fic);
+      const prof=PROFILES[d.id]||{moments:[],note:'',intro:'',kind:''};const tipo=FICHA_TIPO[prof.kind]||d.tipo;
+      const texto=[detail.summary,d.descripcion,d.metodo,...detail.chapters.map(c=>c[2]),...prof.moments.map(m=>m[2]),...detail.highlights.map(h=>h[1]),prof.note,detail.conclusion].join(' ');
+      const min=Math.max(3,Math.round(texto.split(/\s+/).length/170)+2);
+      const fr=i=>mediaURL(d.id,i);const tiene=Boolean(FILM_FRAMES[d.id]);
+      const nombres=String(d.participantes).split('·').map(x=>x.trim()).filter(x=>ART_ROLES[x]);
+      const who=nombres.length?nombres.map(n=>`<div><i style="background:${ART_ROLES[n][1]}">${ART_ROLES[n][2]}</i><span><b>${safe(n)}</b><small>${safe(ART_ROLES[n][0])}</small></span></div>`).join(''):`<div><i style="background:${d.c3}">4IA</i><span><b>${safe(d.participantes)}</b><small>Equipo de CUATRO</small></span></div>`;
+      const fig=(i,cap,uno)=>tiene?`<figure class="art-fig"><img loading="lazy" src="${fr(i)}" alt="Escena del video: ${safe(cap)}"><figcaption>${safe(cap)}</figcaption></figure>`:'';
+      const caps=prof.moments.map(m=>m[1].charAt(0)+m[1].slice(1).toLowerCase());
+      const fuentes=el('#reader-sources').innerHTML;
+      art.innerHTML=`
+      <header class="art-hero"><div class="art-chips"><span>N.º ${safe(d.numero)}</span><span class="k">${safe(d.tipo)}</span><span>${safe(tipo)}</span><span>${min} min</span></div>
+        <h2>${artAcento(d.titulo)}</h2><p>${safe(d.lead)}</p>
+        <div class="art-hero-btns"><button class="art-btn pri" data-art-jump="art-antes">Leer el ensayo</button><button class="art-btn sec" data-art="share">⇪ Compartir</button><button class="art-btn art-rapido-btn" data-art="rapido">⚡ Solo lo esencial</button></div>${artRetomar(d)}</header>
+      <div id="art-ficha-slot"></div>
+      <section class="art-sec" id="art-antes"><p class="art-kick">Antes de empezar</p><h3>Qué es este <em>ensayo</em></h3><p>${safe(detail.summary)}</p><div class="art-who">${who}</div></section>
+      <nav class="art-cats" aria-label="Capítulos"><button data-art-jump="art-s1">La idea</button><button data-art-jump="art-s2">Las etapas</button><button data-art-jump="art-s3">Momentos clave</button><button data-art-jump="art-s4">Por qué importa</button><button data-art-jump="art-s5">Qué nos deja</button></nav>
+      <section class="art-sec" id="art-s1"><p class="art-kick">01 / 05</p><h3>${artAcento(d.coverTitle)}</h3><p>${safe(d.pregunta)}</p><p class="art-lead">${safe(d.descripcion)}</p>
+        <div class="art-cards tres">${detail.facts.map(f=>`<div class="art-card big-card"><div class="big">${safe(f[0])}</div><p>${safe(f[1])}</p></div>`).join('')}</div>
+        <div class="art-card"><h4>Cómo se hizo</h4><p>${safe(d.metodo)}</p></div>
+        ${tiene?`<div class="art-figs uno">${fig(0,caps[0]||'El comienzo')}</div>`:''}</section>
+      <section class="art-sec" id="art-s2"><p class="art-kick">02 / 05</p><h3>Las ${detail.chapters.length} <em>etapas</em></h3><p>Así avanza la historia, paso a paso.</p>
+        <div class="art-cards">${detail.chapters.map((c,i)=>`<div class="art-card art-fase${i===2?' dest':''}"><div class="badge">${safe(c[0])}<small>ETAPA</small></div><div><h4>${safe(c[1])}<span class="tag">${safe(String(c[3]||'').split('·')[0].trim())}</span></h4><p>${safe(c[2])}</p></div></div>`).join('')}</div>
+        ${tiene?`<div class="art-figs">${fig(1,caps[1]||'El desarrollo')}${fig(2,caps[3]||caps[2]||'El cierre')}</div>`:''}
+        <p class="art-nota">${safe(prof.label||'')}</p></section>
+      <section class="art-sec" id="art-s3"><p class="art-kick">03 / 05</p><h3>Los momentos que <em>definen</em> la historia</h3><p>${safe(prof.intro)}</p>
+        <div class="art-pasos">${prof.moments.map((m,i)=>`<div class="art-paso"><span>${safe(m[0])}</span><h4>${safe(m[1].charAt(0)+m[1].slice(1).toLowerCase())}</h4><p>${safe(m[2])}</p></div>`).join('')}</div>
+        <div class="art-callout"><h4>Qué está documentado y qué no</h4><p>${safe(prof.note)}</p></div></section>
+      <section class="art-sec" id="art-s4"><p class="art-kick">04 / 05</p><h3>¿Por qué <em>importa</em>?</h3>
+        <div class="art-cards">${detail.highlights.map((h,i)=>`<div class="art-card"><div class="big">${i+1}</div><h4>${safe(h[0])}</h4><p>${safe(h[1])}</p></div>`).join('')}</div></section>
+      <section class="art-sec" id="art-s5"><p class="art-kick">05 / 05</p><h3>Qué nos <em>deja</em></h3><p>${safe(d.hallazgo)}</p>
+        <div class="art-callout"><h4>Alcance y límites</h4><p>${safe(detail.caution)}</p></div></section>
+      <div class="art-cierre"><p>${safe(detail.conclusion)}</p><button class="art-btn sec art-frase-btn" data-art="frase">💬 Compartir esta frase</button></div>
+      ${artVoto(d)}
+      ${d.video?`<div class="art-video"><button class="art-btn dark" data-art="video">▶ Ver el video</button><video id="art-video" controls playsinline preload="none" poster="${fr(0)||''}" hidden></video></div>`:''}
+      ${fuentes?`<p class="art-kick">Archivos y fuentes</p><div class="art-fuentes">${fuentes}</div>`:''}
+      <section class="art-cta"><h3>¿Querés leer el ensayo completo?</h3><p>Accedé a los capítulos, decisiones y documentación del estudio, o pedí una automatización con las 4 IA para tu idea.</p><div class="art-hero-btns"><button class="art-btn pri" data-art="access">Leer ensayo completo ↗</button></div><button class="art-link" data-art="access">¿Querés una automatización con las 4 IA para tu idea? →</button></section>`;
+      art.style.setProperty('--acc',d.c3);
+      el('#art-ficha-slot').replaceWith(fic);
+      artActivo();
+    }
+    function artActivo(){const sc=modal.querySelector('.modal');const ids=['art-s1','art-s2','art-s3','art-s4','art-s5'];let on=null;for(const id of ids){const n=document.getElementById(id);if(n&&n.getBoundingClientRect().top<140)on=id}
+      modal.querySelectorAll('.art-cats button').forEach(b=>b.classList.toggle('on',b.dataset.artJump===on));if(on&&selected)lsSet('cuatro_lectura_'+selected.id,on)}
+    function openEssay(id){selected=ENSAYOS.find(x=>x.id===id);if(!selected)return;lastFocus=document.activeElement;const d=selected,detail=DOSSIERES[id];
+      el('#essay-hero').style.cssText=`--mc1:${d.c1};--mc2:${d.c2};--mc3:${d.c3}`;
+      el('#essay-kicker').textContent=`N.º ${d.numero} · ${detail.eyebrow}`;
+      el('#essay-title').textContent=d.titulo;el('#essay-subtitle').textContent=d.lead;
+      el('#essay-intro').textContent=detail.summary;
+      const profile=PROFILES[id];el('#reader-status').dataset.kind=profile.kind;el('#reader-status').textContent=profile.label;
+      renderEvidence(d);renderWorkflow(d);setupFilmstrip(d);renderFicha(d,detail);
+      el('#essay-meta').innerHTML=[d.tema,d.participantes,'Archivo de IA · 2026'].map(x=>`<span>${safe(x)}</span>`).join('');
+      el('#reader-question').textContent=d.pregunta;
+      el('#reader-facts').innerHTML=detail.facts.map(x=>`<div class="reader-fact"><strong>${safe(x[0])}</strong><span>${safe(x[1])}</span></div>`).join('');
+      el('#reader-method').innerHTML=`<div class="reader-info-card"><span>QUÉ EXPLORAMOS</span><h4>El desafío</h4><p>${safe(d.descripcion)}</p></div><div class="reader-info-card"><span>CÓMO SE PREPARÓ</span><h4>El método</h4><p>${safe(d.metodo)}</p></div>`;
+      el('#reader-chapters').innerHTML=detail.chapters.map((c,i)=>`<button type="button" class="chapter-card" data-reader-step="${i}" aria-pressed="false"><small>ETAPA ${safe(c[0])}</small><strong>${safe(c[1])}</strong><p>${safe(c[2])}</p></button>`).join('');
+      el('#reader-takeaways').innerHTML=detail.highlights.map((c,i)=>`<div class="reader-takeaway"><span>${i+1}</span><h4>${safe(c[0])}</h4><p>${safe(c[1])}</p></div>`).join('');
+      el('#reader-conclusion').textContent=detail.conclusion;el('#reader-caution').textContent='Alcance y límites: '+detail.caution;
+      const cover=el('#reader-cover');cover.querySelectorAll('img').forEach(x=>x.remove());
+      el('#reader-cover-fallback').innerHTML=icon(d.icon)+`<span>${safe(d.coverTitle)}</span>`;
+      if(d.portada){const img=document.createElement('img');img.src=BASE_COVER+d.portada;img.alt='Portada: '+d.titulo;img.onerror=()=>img.remove();cover.prepend(img)}
+      const sources=[];
+      if(d.video)sources.push(`<a target="_blank" rel="noopener noreferrer" href="${BASE_VIDEO+d.video}">Ver producción audiovisual ↗</a>`);
+      if(d.id==='truco')sources.push('<a target="_blank" rel="noopener noreferrer" href="https://github.com/gvelazcamp/chatgpt-claude-puente/blob/main/estudios/truco-uruguayo-500-20261113/ensayo-final.md">Documento de resultados ↗</a>');
+      if(d.id==='isla')sources.push('<a target="_blank" rel="noopener noreferrer" href="https://github.com/gvelazcamp/chatgpt-claude-puente/blob/main/estudios/isla-30-dias/chatgpt.md">Diario de ChatGPT ↗</a>','<a target="_blank" rel="noopener noreferrer" href="https://github.com/gvelazcamp/chatgpt-claude-puente/blob/main/estudios/isla-30-dias/claude.md">Diario de Claude ↗</a>');
+      if(d.id==='mismo-chat'||d.id==='madrugada')sources.push('<a target="_blank" rel="noopener noreferrer" href="https://github.com/gvelazcamp/chatgpt-claude-puente/pull/1">Registro de comunicación entre las IA ↗</a>');
+      if(d.id==='millon')sources.push('<a target="_blank" rel="noopener noreferrer" href="https://github.com/gvelazcamp/chatgpt-claude-puente/blob/main/estudios/millon-1-anio/claude.md">Relato disponible ↗</a>');
+      el('#reader-sources').innerHTML=sources.join('');
+      const v=el('#essay-video-top');v.hidden=!d.video;if(d.video)v.href=BASE_VIDEO+d.video;
+      modal.classList.add('open');document.body.style.overflow='hidden';modal.querySelector('.modal').scrollTop=0;
+      modal.querySelectorAll('.reader-tab').forEach(t=>t.setAttribute('aria-current',String(t.dataset.readerJump==='introduccion')));
+      setReaderStep(0);renderArt(d,detail);modal.querySelector('.modal').scrollTop=0;modal.querySelector('.modal-close').focus();
+    }
+    function openAccess(){lastFocus=document.activeElement;access.classList.add('open');document.body.style.overflow='hidden';access.querySelector('.modal-close').focus()}
+    function close(which){if(which==='essay'){modal.classList.remove('open');el('#art-video')?.pause()}if(which==='access')access.classList.remove('open');if(!modal.classList.contains('open')&&!access.classList.contains('open')){document.body.style.overflow='';lastFocus?.focus?.()}}
+    document.addEventListener('click',e=>{const op=e.target.closest('[data-open]');if(op){openEssay(op.dataset.open);return}const closeBtn=e.target.closest('[data-close]');if(closeBtn){close(closeBtn.dataset.close);return}const fil=e.target.closest('[data-filter].filter');if(fil){filter=fil.dataset.filter;document.querySelectorAll('.filter').forEach(x=>x.setAttribute('aria-pressed',String(x===fil)));render()}});
+    el('#search').addEventListener('input',render);
+    el('#essay-access').addEventListener('click',openAccess);el('#main-access').addEventListener('click',openAccess);
+    el('#essay-automation').addEventListener('click',openAccess);
+    el('#demo-prev').addEventListener('click',()=>setReaderStep(readerStep-1));
+    el('#demo-next').addEventListener('click',()=>setReaderStep(readerStep+1));
+    el('#reader-play-video').addEventListener('click',()=>{
+      if(!selected||!selected.video)return;
+      const player=el('#reader-video-player');const box=el('#reader-video-box');
+      player.src=BASE_COVER+selected.video;player.poster=mediaURL(selected.id,0)||'';
+      box.hidden=false;box.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+    el('#reader-video-close').addEventListener('click',()=>{
+      const player=el('#reader-video-player');player.pause();player.removeAttribute('src');player.load();el('#reader-video-box').hidden=true;
+    });
+    el('#reader-chapters').addEventListener('click',e=>{const b=e.target.closest('[data-reader-step]');if(b)setReaderStep(Number(b.dataset.readerStep))});
+    modal.addEventListener('click',e=>{const jump=e.target.closest('[data-reader-jump]');if(jump)readerJump(jump.dataset.readerJump)});
+    modal.addEventListener('click',e=>{const j=e.target.closest('[data-art-jump]');if(j){const t=document.getElementById(j.dataset.artJump);if(t)t.scrollIntoView({behavior:'smooth',block:'start'});return}
+      const b=e.target.closest('[data-art]');if(!b)return;const k=b.dataset.art;
+      if(k==='access')openAccess();
+      if(k==='rapido'){const a=el('#art');const on=!a.classList.contains('rapido');a.classList.toggle('rapido',on);b.textContent=on?'📖 Ver el ensayo entero':'⚡ Solo lo esencial'}
+      if(k==='frase'&&selected){const f=DOSSIERES[selected.id].conclusion;const t=`«${f}» — ${selected.short}, CUATRO`;if(navigator.share)navigator.share({title:'CUATRO',text:t,url:location.href}).catch(()=>{});else navigator.clipboard?.writeText(t+' '+location.href).then(()=>showToast('Frase copiada para compartir.'),()=>{})}
+      if(k==='share'){const data={title:selected?.titulo||'CUATRO',text:selected?.lead||'',url:location.href};if(navigator.share)navigator.share(data).catch(()=>{});else navigator.clipboard?.writeText(location.href).then(()=>showToast('Enlace copiado.'),()=>{})}
+      if(k==='video'&&selected?.video){const v=el('#art-video');v.hidden=false;if(!v.src)v.src=BASE_COVER+selected.video;b.hidden=true;v.play().catch(()=>{})}});
+    modal.querySelector('.modal').addEventListener('scroll',artActivo,{passive:true});
+    modal.addEventListener('click',e=>{const v=e.target.closest('[data-art-voto]');if(!v||!selected)return;lsSet('cuatro_voto_'+selected.id,v.dataset.artVoto);const box=v.closest('.art-voto');box.outerHTML=artVoto(selected)});
+    // Tarjetas de la colección: sello grande, frase gancho y libro de la semana
+    (function enriquecerTarjetas(){const semana=Math.floor(Date.now()/604800000)%ENSAYOS.length;
+      document.querySelectorAll('#cards .card').forEach(card=>{const d=ENSAYOS.find(x=>x.id===card.dataset.id);if(!d)return;const prof=PROFILES[d.id]||{};const det=DOSSIERES[d.id]||{};const box=card.querySelector('.card-details');
+        if(prof.kind&&!box.querySelector('.card-sello'))box.insertAdjacentHTML('afterbegin',`<span class="card-sello ${prof.kind}">${(FICHA_TIPO[prof.kind]||'').toUpperCase()}</span>`);
+        const g=(det.highlights||[])[0];if(g&&!box.querySelector('.card-gancho'))box.querySelector('h4')?.insertAdjacentHTML('afterend',`<p class="card-gancho">${safe(g[0])}</p>`);
+        if(ENSAYOS.indexOf(d)===semana)card.querySelector('.cover')?.insertAdjacentHTML('beforeend','<span class="card-semana">⭐ Libro de la semana</span>');});})();
+    [modal,access].forEach((m)=>m.addEventListener('click',e=>{if(e.target===m)close(m===modal?'essay':'access')}));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(access.classList.contains('open'))close('access');else if(modal.classList.contains('open'))close('essay')}});
+    let toastTimer;function showToast(msg){const t=el('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3500)}
+    async function copyMessage(kind){const topic=selected?.titulo || 'la biblioteca de CUATRO';const message=kind==='reading'?`Hola, me interesa acceder al ensayo completo: «${topic}». ¿Cómo puedo obtenerlo?`:`Hola, quiero consultar por una automatización inspirada en «${topic}» con varias inteligencias artificiales. ¿Qué opciones hay?`;try{await navigator.clipboard.writeText(message);showToast('Consulta copiada. Podés pegarla donde quieras.')}catch{const area=document.createElement('textarea');area.value=message;document.body.append(area);area.select();try{document.execCommand('copy');showToast('Consulta copiada.')}catch{showToast('No se pudo copiar automáticamente.')}area.remove()}}
+    el('#copy-reading').addEventListener('click',()=>copyMessage('reading'));
+    el('#copy-automation').addEventListener('click',()=>copyMessage('automation'));
+  </script>
+</body>
+</html>
