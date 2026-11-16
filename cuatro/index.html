@@ -573,19 +573,6 @@
     @media(max-width:900px){.ej-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.ej-grid{grid-template-columns:1fr}.ej-resultado{text-align:center;justify-content:center}}
     /* ===== Cierre del inicio (pedido de Gonzalo, 16/11/2026) ===== */
-    /* La colección pasa a ser un índice compacto: miniatura, sello, título, gancho y Explorar */
-    #cards.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    #cards .card{flex-direction:row;align-items:stretch;border-radius:18px}
-    #cards .card:hover{transform:none}
-    #cards .cover{flex:0 0 74px;width:74px;aspect-ratio:9/16;margin:10px 0 10px 10px;padding:0;border-radius:10px}
-    #cards .cover:not(:has(.cover-img)) .cover-top,#cards .cover:not(:has(.cover-img)) .cover-bottom,#cards .cover:not(:has(.cover-img)) h3{display:none}
-    #cards .cover:not(:has(.cover-img)) .cover-icon{width:40px;height:40px;margin:auto}
-    #cards .card-semana{font-size:9px;padding:3px 5px;top:4px;left:4px}
-    #cards .card-details{padding:10px 14px 12px;gap:4px}
-    #cards .card-details>p,#cards .chips{display:none}
-    #cards .card-details h4{font-size:15px}
-    #cards .card-foot{padding-top:4px}
-    @media(max-width:700px){#cards.grid{grid-template-columns:1fr}}
     .quien{padding-top:30px;padding-bottom:40px}
     .quien-card{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;align-items:center;background:#fff;border:1px solid #e8e8f1;border-radius:26px;padding:28px}
     .quien h2{font-size:clamp(26px,3.6vw,38px);letter-spacing:-1px;margin:6px 0 10px}.quien h2 em{font-family:Georgia,serif;font-weight:450;color:#7360d7}
