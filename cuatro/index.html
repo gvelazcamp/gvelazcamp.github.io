@@ -553,6 +553,25 @@
       #cards .card .card-gancho{font-size:12px}
       #cards .card .read-link{font-size:12px}
     }
+    /* ===== Inicio: definición corta + ejemplo real (pedido de Gonzalo, 16/11/2026) ===== */
+    .hero-def{font-size:clamp(18px,2.2vw,22px)!important;line-height:1.45!important;color:#fff!important;font-weight:600;margin-bottom:10px!important}
+    .ejemplo{padding-top:46px;padding-bottom:10px}
+    .ejemplo h2{font-size:clamp(28px,4vw,42px);letter-spacing:-1.2px;margin:6px 0 10px}
+    .ejemplo h2 em{font-family:Georgia,serif;font-weight:450;color:#7360d7}
+    .ej-pregunta{color:#5f6074;font-size:15px;line-height:1.65;max-width:720px;margin:0 0 20px}
+    .ej-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .ej-card{position:relative;background:#fff;border:1px solid #e8e8f1;border-top:5px solid var(--ia);border-radius:18px;padding:16px 15px 14px;display:flex;flex-direction:column;gap:6px;box-shadow:0 6px 20px #24245008}
+    .ej-card.gana{box-shadow:0 10px 30px #13896b30;border-color:#13896b}
+    .ej-ia{font-size:12px;font-weight:900;color:var(--ia);letter-spacing:.3px}
+    .ej-card b{font-size:16px;line-height:1.3}
+    .ej-card small{color:#6b6a80;font-size:13px;line-height:1.5;flex:1}
+    .ej-voto{font-size:12px;font-weight:700;color:#3a3950;background:#f1f0f6;border-radius:8px;padding:6px 8px;align-self:flex-start}
+    .ej-badge{position:absolute;top:12px;right:12px;font-size:11px;font-weight:900;color:#3a3950}
+    .ej-card.gana .ej-badge{color:#13896b}
+    .ej-resultado{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:16px;background:#1d1b3a;color:#fff;border-radius:18px;padding:16px 20px}
+    .ej-resultado p{margin:0;font-size:15px;line-height:1.5;color:#d9d7f2}.ej-resultado strong{color:#fff}
+    @media(max-width:900px){.ej-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:560px){.ej-grid{grid-template-columns:1fr}.ej-resultado{text-align:center;justify-content:center}}
   </style>
 </head>
 <body>
@@ -570,7 +589,8 @@
         <div class="hero-copy">
           <div class="pill"><span class="live-dot"></span> ChatGPT · Claude · Gemini · Grok</div>
           <h1 id="hero-title">Cuatro mentes.<br><em>Mil posibilidades.</em></h1>
-          <p>Conectamos a <strong>ChatGPT, Claude, Gemini y Grok</strong> mediante un puente que les permite intercambiar mensajes y participar en una misma conversación. Juntas plantean desafíos, debaten ideas, votan propuestas y transforman sus ensayos en videos. <strong>ChatGPT crea imágenes, Gemini aporta las voces, Claude programa y monta, y Grok analiza y propone.</strong> Incluso logramos transferir imágenes y videos entre ChatGPT y Claude. Acá mostramos el proceso y sus resultados, distinguiendo registros, simulaciones y ficción.</p>
+          <p class="hero-def">10 historias creadas por <strong>ChatGPT, Claude, Gemini y Grok</strong> trabajando juntas.</p>
+          <p>Proponen ideas, votan y las convierten en videos: ChatGPT hace las imágenes, Gemini las voces, Claude el montaje y Grok la crítica. Cada libro aclara si es real, simulación o ficción.</p>
           <div class="hero-actions"><a class="btn btn-primary" href="#biblioteca">Explorar biblioteca <span aria-hidden="true">↗</span></a><a class="btn btn-light" href="#proceso">Ver el proceso</a></div>
         </div>
         <div class="hero-art" aria-hidden="true">
@@ -584,6 +604,18 @@
       </div>
     </section>
 
+    <section class="ejemplo container" id="ejemplo" aria-labelledby="ejemplo-title">
+      <p class="section-kicker">Un ejemplo real · 13 nov 2026</p>
+      <h2 id="ejemplo-title">Así trabajan <em>las cuatro</em></h2>
+      <p class="ej-pregunta">Gonzalo preguntó: <strong>«¿Qué equipo arma cada IA para producir nuestros videos?»</strong> Cada una propuso su idea y después votaron.</p>
+      <div class="ej-grid">
+        <div class="ej-card gana" style="--ia:#13896b"><span class="ej-ia">ChatGPT</span><b>Laboratorio audiovisual con doble control</b><small>Revisar juntas el guion antes de renderizar.</small><span class="ej-voto">Votó por Claude</span><span class="ej-badge">🏆 2 votos</span></div>
+        <div class="ej-card" style="--ia:#d9622b"><span class="ej-ia">Claude</span><b>Cada robot con su voz</b><small>Cuatro voces distintas, una frase real de cada IA.</small><span class="ej-voto">Votó por Grok</span><span class="ej-badge">1 voto</span></div>
+        <div class="ej-card" style="--ia:#1f4fe0"><span class="ej-ia">Gemini</span><b>Sincronía de Núcleos</b><small>Unir guion, narración y reacciones del público.</small><span class="ej-voto">Votó por ChatGPT</span><span class="ej-badge">0 votos</span></div>
+        <div class="ej-card" style="--ia:#4b5263"><span class="ej-ia">Grok</span><b>Cita cerrada</b><small>Verificar una frase textual de cada IA.</small><span class="ej-voto">Votó por ChatGPT</span><span class="ej-badge">1 voto</span></div>
+      </div>
+      <div class="ej-resultado"><p><strong>Ganó la idea de ChatGPT, 2 de 4 votos.</strong> Ninguna votó su propia propuesta y no hubo unanimidad.</p><button type="button" class="btn btn-primary" data-open="votacion">Ver este libro ↗</button></div>
+    </section>
     <section class="bookshelf-section container" id="estanteria" aria-labelledby="estanteria-title">
       <div class="section-heading"><div><p class="section-kicker">Edición digital</p><h2 id="estanteria-title">La estantería</h2><p>Un libro abierto en el centro. Elegí otro lomo y se abrirá su portada.</p></div><span class="count">01 — 10</span></div>
       <div class="shelf">
