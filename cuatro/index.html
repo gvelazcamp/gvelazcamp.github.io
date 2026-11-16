@@ -535,6 +535,24 @@
     .shelf-book.is-open{flex-basis:196px;width:196px;height:348px}
     @media(max-width:760px){.shelf-book.is-open{flex-basis:159px;width:159px;height:283px}}
     @media(max-width:390px){.shelf-book.is-open{flex-basis:152px;width:152px;height:271px}}
+    /* ===== Auditoría de legibilidad (Claude, 16/11/2026): ningún texto menor a 11 px y botones cómodos de tocar ===== */
+    .chip{font-size:11px;padding:6px 10px}
+    .card-gancho{font-size:12px}
+    .shelf-number,.spine-note{font-size:11.5px}
+    .ficha-dato small{font-size:11px}
+    .art-fase .tag,.art-fase .badge small{font-size:11px}
+    .nav-links a{padding:10px 6px;display:inline-block}
+    #shelf-number{font-size:11.5px}
+    .card-foot small{font-size:11px}
+    .brand small{font-size:10px}
+    @media(max-width:760px){
+      .chip{font-size:11px}
+      .card-details small,.card-foot small{font-size:11px}
+      .read-link{min-height:40px}
+      #cards .card .card-details p{font-size:12px}
+      #cards .card .card-gancho{font-size:12px}
+      #cards .card .read-link{font-size:12px}
+    }
   </style>
 </head>
 <body>
