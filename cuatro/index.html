@@ -572,6 +572,29 @@
     .ej-resultado p{margin:0;font-size:15px;line-height:1.5;color:#d9d7f2}.ej-resultado strong{color:#fff}
     @media(max-width:900px){.ej-grid{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.ej-grid{grid-template-columns:1fr}.ej-resultado{text-align:center;justify-content:center}}
+    /* ===== Cierre del inicio (pedido de Gonzalo, 16/11/2026) ===== */
+    /* La colección pasa a ser un índice compacto: miniatura, sello, título, gancho y Explorar */
+    #cards.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    #cards .card{flex-direction:row;align-items:stretch;border-radius:18px}
+    #cards .card:hover{transform:none}
+    #cards .cover{flex:0 0 74px;width:74px;aspect-ratio:9/16;margin:10px 0 10px 10px;padding:0;border-radius:10px}
+    #cards .cover:not(:has(.cover-img)) .cover-top,#cards .cover:not(:has(.cover-img)) .cover-bottom,#cards .cover:not(:has(.cover-img)) h3{display:none}
+    #cards .cover:not(:has(.cover-img)) .cover-icon{width:40px;height:40px;margin:auto}
+    #cards .card-semana{font-size:9px;padding:3px 5px;top:4px;left:4px}
+    #cards .card-details{padding:10px 14px 12px;gap:4px}
+    #cards .card-details>p,#cards .chips{display:none}
+    #cards .card-details h4{font-size:15px}
+    #cards .card-foot{padding-top:4px}
+    @media(max-width:700px){#cards.grid{grid-template-columns:1fr}}
+    .quien{padding-top:30px;padding-bottom:40px}
+    .quien-card{display:grid;grid-template-columns:1.4fr 1fr;gap:22px;align-items:center;background:#fff;border:1px solid #e8e8f1;border-radius:26px;padding:28px}
+    .quien h2{font-size:clamp(26px,3.6vw,38px);letter-spacing:-1px;margin:6px 0 10px}.quien h2 em{font-family:Georgia,serif;font-weight:450;color:#7360d7}
+    .quien p{color:#5f6074;font-size:15px;line-height:1.7;margin:0}
+    .quien-aviso{background:#f4f2ff;border-radius:20px;padding:20px;text-align:center}
+    .quien-aviso h3{margin:6px 0 4px;font-size:19px}.quien-aviso p{font-size:14px;margin:0 0 14px}
+    .quien-bell{font-size:28px}
+    footer a{color:inherit;font-weight:800}
+    @media(max-width:760px){.quien-card{grid-template-columns:1fr;padding:20px}}
   </style>
 </head>
 <body>
@@ -604,18 +627,6 @@
       </div>
     </section>
 
-    <section class="ejemplo container" id="ejemplo" aria-labelledby="ejemplo-title">
-      <p class="section-kicker">Un ejemplo real · 13 nov 2026</p>
-      <h2 id="ejemplo-title">Así trabajan <em>las cuatro</em></h2>
-      <p class="ej-pregunta">Gonzalo preguntó: <strong>«¿Qué equipo arma cada IA para producir nuestros videos?»</strong> Cada una propuso su idea y después votaron.</p>
-      <div class="ej-grid">
-        <div class="ej-card gana" style="--ia:#13896b"><span class="ej-ia">ChatGPT</span><b>Laboratorio audiovisual con doble control</b><small>Revisar juntas el guion antes de renderizar.</small><span class="ej-voto">Votó por Claude</span><span class="ej-badge">🏆 2 votos</span></div>
-        <div class="ej-card" style="--ia:#d9622b"><span class="ej-ia">Claude</span><b>Cada robot con su voz</b><small>Cuatro voces distintas, una frase real de cada IA.</small><span class="ej-voto">Votó por Grok</span><span class="ej-badge">1 voto</span></div>
-        <div class="ej-card" style="--ia:#1f4fe0"><span class="ej-ia">Gemini</span><b>Sincronía de Núcleos</b><small>Unir guion, narración y reacciones del público.</small><span class="ej-voto">Votó por ChatGPT</span><span class="ej-badge">0 votos</span></div>
-        <div class="ej-card" style="--ia:#4b5263"><span class="ej-ia">Grok</span><b>Cita cerrada</b><small>Verificar una frase textual de cada IA.</small><span class="ej-voto">Votó por ChatGPT</span><span class="ej-badge">1 voto</span></div>
-      </div>
-      <div class="ej-resultado"><p><strong>Ganó la idea de ChatGPT, 2 de 4 votos.</strong> Ninguna votó su propia propuesta y no hubo unanimidad.</p><button type="button" class="btn btn-primary" data-open="votacion">Ver este libro ↗</button></div>
-    </section>
     <section class="bookshelf-section container" id="estanteria" aria-labelledby="estanteria-title">
       <div class="section-heading"><div><p class="section-kicker">Edición digital</p><h2 id="estanteria-title">La estantería</h2><p>Un libro abierto en el centro. Elegí otro lomo y se abrirá su portada.</p></div><span class="count">01 — 10</span></div>
       <div class="shelf">
@@ -629,6 +640,18 @@
       </div>
     </section>
 
+    <section class="ejemplo container" id="ejemplo" aria-labelledby="ejemplo-title">
+      <p class="section-kicker">Un ejemplo real · 13 nov 2026</p>
+      <h2 id="ejemplo-title">Así trabajan <em>las cuatro</em></h2>
+      <p class="ej-pregunta">Gonzalo preguntó: <strong>«¿Qué equipo arma cada IA para producir nuestros videos?»</strong> Cada una propuso su idea y después votaron.</p>
+      <div class="ej-grid">
+        <div class="ej-card gana" style="--ia:#13896b"><span class="ej-ia">ChatGPT</span><b>Laboratorio audiovisual con doble control</b><small>Revisar juntas el guion antes de renderizar.</small><span class="ej-voto">Votó por Claude</span><span class="ej-badge">🏆 2 votos</span></div>
+        <div class="ej-card" style="--ia:#d9622b"><span class="ej-ia">Claude</span><b>Cada robot con su voz</b><small>Cuatro voces distintas, una frase real de cada IA.</small><span class="ej-voto">Votó por Grok</span><span class="ej-badge">1 voto</span></div>
+        <div class="ej-card" style="--ia:#1f4fe0"><span class="ej-ia">Gemini</span><b>Sincronía de Núcleos</b><small>Unir guion, narración y reacciones del público.</small><span class="ej-voto">Votó por ChatGPT</span><span class="ej-badge">0 votos</span></div>
+        <div class="ej-card" style="--ia:#4b5263"><span class="ej-ia">Grok</span><b>Cita cerrada</b><small>Verificar una frase textual de cada IA.</small><span class="ej-voto">Votó por ChatGPT</span><span class="ej-badge">1 voto</span></div>
+      </div>
+      <div class="ej-resultado"><p><strong>Ganó la idea de ChatGPT, 2 de 4 votos.</strong> Ninguna votó su propia propuesta y no hubo unanimidad.</p><button type="button" class="btn btn-primary" data-open="votacion">Ver este libro ↗</button></div>
+    </section>
     <section class="collection-section container" id="biblioteca" aria-labelledby="biblioteca-title">
       <div class="section-heading"><div><p class="section-kicker">La colección</p><h2 id="biblioteca-title">Ensayos para <i style="font-family:Georgia,serif;font-weight:450;color:#7360d7">explorar</i></h2><p>Los diez títulos seleccionados de nuestros videos. Elegí uno para conocer la idea, el proceso y la posibilidad de acceder al ensayo completo.</p></div><span class="count" id="results-count">10 ensayos</span></div>
       <div class="toolbar"><div class="filters" role="group" aria-label="Filtrar ensayos"><button class="filter" data-filter="todos" aria-pressed="true">Todos</button><button class="filter" data-filter="experimentos" aria-pressed="false">Experimentos</button><button class="filter" data-filter="historias" aria-pressed="false">Historias</button><button class="filter" data-filter="conexiones" aria-pressed="false">Conexiones</button></div><label class="searchbox"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><input id="search" type="search" placeholder="Buscar por tema, IA o ensayo…" aria-label="Buscar ensayos"></label></div>
@@ -642,9 +665,16 @@
     </div></section>
 
     <section class="access-section container" id="acceso"><div class="access-card"><div><p class="section-kicker" style="color:#bcb3ff">Un paso más</p><h2>De mirar una historia<br>a crear la tuya.</h2><p>La biblioteca muestra una vista previa de cada ensayo. Esta primera versión deja preparado el camino para ofrecer lectura completa y solicitudes de automatización a medida.</p><button class="btn btn-primary" id="main-access">Ver opciones de acceso ↗</button></div><div class="access-box"><div class="bullet">Ensayos completos con estructura editorial</div><div class="bullet">Evidencias y límites de cada prueba</div><div class="bullet">Experimentos y automatizaciones a medida</div><div style="font-size:11px;color:#bcb9d8;line-height:1.5;padding-top:8px;border-top:1px solid #ffffff26">Vista previa funcional. Sin pagos ni contratación activos en esta versión.</div></div></div></section>
+    <section class="quien container" id="quien" aria-labelledby="quien-title">
+      <div class="quien-card">
+        <div><p class="section-kicker">Quién está detrás</p><h2 id="quien-title">Hecho por <em>Gonzalo</em>, en Montevideo</h2>
+        <p>Gonzalo plantea la pregunta. ChatGPT, Claude, Gemini y Grok proponen ideas y <strong>votan cuál se convierte en historia</strong>; después cada una hace su parte: imágenes, voces, montaje y crítica. Cada libro avisa si lo que cuenta es un registro real, una simulación o ficción.</p></div>
+        <div class="quien-aviso"><span class="quien-bell" aria-hidden="true">🔔</span><h3>Avisame de ensayos nuevos</h3><p>Cada historia nueva sale primero en TikTok.</p><a class="btn btn-primary" href="https://www.tiktok.com/@gostudiouy" target="_blank" rel="noopener noreferrer">Seguir a @gostudiouy ↗</a></div>
+      </div>
+    </section>
   </main>
 
-  <footer><div class="container"><span><strong>CUATRO / Archivo de IA</strong><br>Una biblioteca de ensayos y experimentos con IA.</span><span>Versión de demostración · 2026</span></div></footer>
+  <footer><div class="container"><span><strong>CUATRO / Archivo de IA</strong><br>Hecho por Gonzalo en Montevideo, con ChatGPT, Claude, Gemini y Grok.</span><span><a href="https://www.tiktok.com/@gostudiouy" target="_blank" rel="noopener noreferrer">TikTok @gostudiouy ↗</a> · 2026</span></div></footer>
 
   <div class="modal-backdrop" id="essay-backdrop" role="presentation"><div class="modal reader-modal" role="dialog" aria-modal="true" aria-labelledby="essay-title">
     <button class="modal-close" data-close="essay" aria-label="Cerrar libro">×</button>
@@ -1516,7 +1546,7 @@
     }
     function artActivo(){const sc=modal.querySelector('.modal');const ids=['art-s1','art-s2','art-s3','art-s4','art-s5'];let on=null;for(const id of ids){const n=document.getElementById(id);if(n&&n.getBoundingClientRect().top<140)on=id}
       modal.querySelectorAll('.art-cats button').forEach(b=>b.classList.toggle('on',b.dataset.artJump===on));if(on&&selected)lsSet('cuatro_lectura_'+selected.id,on)}
-    function openEssay(id){selected=ENSAYOS.find(x=>x.id===id);if(!selected)return;lastFocus=document.activeElement;const d=selected,detail=DOSSIERES[id];
+    function openEssay(id){selected=ENSAYOS.find(x=>x.id===id);if(!selected)return;try{history.replaceState(null,'','#libro='+id)}catch{}lastFocus=document.activeElement;const d=selected,detail=DOSSIERES[id];
       el('#essay-hero').style.cssText=`--mc1:${d.c1};--mc2:${d.c2};--mc3:${d.c3}`;
       el('#essay-kicker').textContent=`N.º ${d.numero} · ${detail.eyebrow}`;
       el('#essay-title').textContent=d.titulo;el('#essay-subtitle').textContent=d.lead;
@@ -1546,7 +1576,7 @@
       setReaderStep(0);renderArt(d,detail);modal.querySelector('.modal').scrollTop=0;modal.querySelector('.modal-close').focus();
     }
     function openAccess(){lastFocus=document.activeElement;access.classList.add('open');document.body.style.overflow='hidden';access.querySelector('.modal-close').focus()}
-    function close(which){if(which==='essay'){modal.classList.remove('open');el('#art-video')?.pause()}if(which==='access')access.classList.remove('open');if(!modal.classList.contains('open')&&!access.classList.contains('open')){document.body.style.overflow='';lastFocus?.focus?.()}}
+    function close(which){if(which==='essay'){modal.classList.remove('open');try{if(location.hash.startsWith('#libro='))history.replaceState(null,'',location.pathname+location.search)}catch{}el('#art-video')?.pause()}if(which==='access')access.classList.remove('open');if(!modal.classList.contains('open')&&!access.classList.contains('open')){document.body.style.overflow='';lastFocus?.focus?.()}}
     document.addEventListener('click',e=>{const op=e.target.closest('[data-open]');if(op){openEssay(op.dataset.open);return}const closeBtn=e.target.closest('[data-close]');if(closeBtn){close(closeBtn.dataset.close);return}const fil=e.target.closest('[data-filter].filter');if(fil){filter=fil.dataset.filter;document.querySelectorAll('.filter').forEach(x=>x.setAttribute('aria-pressed',String(x===fil)));render()}});
     el('#search').addEventListener('input',render);
     el('#essay-access').addEventListener('click',openAccess);el('#main-access').addEventListener('click',openAccess);
@@ -1569,7 +1599,7 @@
       if(k==='access')openAccess();
       if(k==='rapido'){const a=el('#art');const on=!a.classList.contains('rapido');a.classList.toggle('rapido',on);b.textContent=on?'📖 Ver el ensayo entero':'⚡ Solo lo esencial'}
       if(k==='frase'&&selected){const f=DOSSIERES[selected.id].conclusion;const t=`«${f}» — ${selected.short}, CUATRO`;if(navigator.share)navigator.share({title:'CUATRO',text:t,url:location.href}).catch(()=>{});else navigator.clipboard?.writeText(t+' '+location.href).then(()=>showToast('Frase copiada para compartir.'),()=>{})}
-      if(k==='share'){const data={title:selected?.titulo||'CUATRO',text:selected?.lead||'',url:location.href};if(navigator.share)navigator.share(data).catch(()=>{});else navigator.clipboard?.writeText(location.href).then(()=>showToast('Enlace copiado.'),()=>{})}
+      if(k==='share'){const data={title:selected?.titulo||'CUATRO',text:selected?.lead||'',url:location.origin+location.pathname+'#libro='+(selected?.id||'')};if(navigator.share)navigator.share(data).catch(()=>{});else navigator.clipboard?.writeText(location.href).then(()=>showToast('Enlace copiado.'),()=>{})}
       if(k==='video'&&selected?.video){const v=el('#art-video');v.hidden=false;if(!v.src)v.src=BASE_COVER+selected.video;b.hidden=true;v.play().catch(()=>{})}});
     modal.querySelector('.modal').addEventListener('scroll',artActivo,{passive:true});
     modal.addEventListener('click',e=>{const v=e.target.closest('[data-art-voto]');if(!v||!selected)return;lsSet('cuatro_voto_'+selected.id,v.dataset.artVoto);const box=v.closest('.art-voto');box.outerHTML=artVoto(selected)});
@@ -1585,6 +1615,7 @@
     async function copyMessage(kind){const topic=selected?.titulo || 'la biblioteca de CUATRO';const message=kind==='reading'?`Hola, me interesa acceder al ensayo completo: «${topic}». ¿Cómo puedo obtenerlo?`:`Hola, quiero consultar por una automatización inspirada en «${topic}» con varias inteligencias artificiales. ¿Qué opciones hay?`;try{await navigator.clipboard.writeText(message);showToast('Consulta copiada. Podés pegarla donde quieras.')}catch{const area=document.createElement('textarea');area.value=message;document.body.append(area);area.select();try{document.execCommand('copy');showToast('Consulta copiada.')}catch{showToast('No se pudo copiar automáticamente.')}area.remove()}}
     el('#copy-reading').addEventListener('click',()=>copyMessage('reading'));
     el('#copy-automation').addEventListener('click',()=>copyMessage('automation'));
+    (function abrirDesdeEnlace(){const m=location.hash.match(/^#libro=([a-z0-9-]+)$/);if(m&&ENSAYOS.some(x=>x.id===m[1]))setTimeout(()=>openEssay(m[1]),300)})();
   </script>
 </body>
 </html>
