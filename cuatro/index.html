@@ -522,6 +522,19 @@
     .card-gancho{margin:0;font-size:12.5px;font-weight:700;color:#3a3950;line-height:1.45}
     .card-gancho:before{content:'✨ ';}
     .card-semana{position:absolute;z-index:3;top:10px;left:10px;background:#ffd34d;color:#2a2200;font-size:11px;font-weight:900;padding:6px 10px;border-radius:9px;box-shadow:0 6px 16px #0004}
+    /* ===== Arreglos de celular pedidos por Gonzalo (16/11/2026) ===== */
+    /* 1) Cierre del libro: botón y enlace centrados */
+    .art-cta{text-align:center}.art-cta .art-hero-btns{justify-content:center}
+    /* 2) Tarjetas: texto junto, sin huecos, y el botón Explorar siempre abajo y alineado */
+    .card-details{gap:6px}
+    .card-details h4{min-height:0}
+    .card-details p{flex:none}
+    .card-gancho{margin:0}
+    .card-foot{margin-top:auto}
+    /* 3) Estantería: el libro abierto tiene la forma de la carátula (9:16), así no se corta */
+    .shelf-book.is-open{flex-basis:196px;width:196px;height:348px}
+    @media(max-width:760px){.shelf-book.is-open{flex-basis:159px;width:159px;height:283px}}
+    @media(max-width:390px){.shelf-book.is-open{flex-basis:152px;width:152px;height:271px}}
   </style>
 </head>
 <body>
